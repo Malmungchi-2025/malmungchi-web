@@ -1,0 +1,81 @@
+.transcript-detail-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  background-attachment: fixed;
+  background: #ffffff;
+}
+
+.detail-page {
+  position: relative;
+  padding: 0px 250px;
+}
+
+.detail-title {
+  font-size: 26px;
+  font-weight: 400;
+  color: #616161;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.detail-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.page-box {
+  width: 700px;
+  height: 680px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+  text-align: left;
+  overflow-y: auto;
+
+  /* 글자 */
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  color: #262626;
+  font-size: 32px;
+  line-height: 1.6;
+}
+
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+  font-size: 36px;
+  color: #c9cad4;
+  cursor: pointer;
+  padding: 14px;
+}
+
+/* 왼쪽 버튼: 패딩 영역 안쪽에 위치 */
+.arrow-btn.left {
+  left: 180px; /* 250px 패딩 안에 들어오도록 조정 */
+}
+
+/* 오른쪽 버튼: 패딩 영역 안쪽에 위치 */
+.arrow-btn.right {
+  right: 180px; /* 250px 패딩 안에 들어오도록 조정 */
+}
+
+.arrow-btn:disabled {
+  opacity: 0.5;
+}
+
+.detail-footer {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #616161;
+  text-align: right;
+}

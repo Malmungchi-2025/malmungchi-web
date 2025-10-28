@@ -1,0 +1,56 @@
+.TCP-hero-center {
+  position: relative;
+  z-index: 1; /* 어둡게 레이어 위로 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 0px;
+}
+
+.TCP-hero-center h2 {
+  font-size: 48px;
+  font-weight: 700;
+  padding-bottom: 0px;
+}
+
+.TCP-hero-center img {
+  margin-top: 0px;
+}
+
+.TCP-hero-center p {
+  font-size: 32px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+/* 버튼 */
+.TCP-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.TCP-btn-cancel {
+  width: 220px;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.TCP-btn-save {
+  width: 220px;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}

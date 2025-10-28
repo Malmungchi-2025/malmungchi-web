@@ -1,0 +1,213 @@
+.direct-main {
+  padding: 0 250px;
+}
+.direct-add-header {
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  gap: 12px; /* 입력창과 버튼 사이 간격 */
+  margin-bottom: 30px;
+  margin-top: 16px;
+}
+
+.direct-add-title {
+  font-size: 32px;
+  font-weight: 550;
+  color: #195fcf;
+  margin-bottom: 20px;
+}
+
+.direct-add-btn {
+  margin-left: auto;
+  width: 220px;
+  height: 60px;
+  background: #c9cad4;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.direct-add-btn:hover {
+  background: #195fcf;
+}
+
+.direct-add-input {
+  padding: 8px 2px;
+  margin-bottom: 40px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #616161;
+  font-size: 26px;
+  color: #262626;
+}
+.direct-add-input::placeholder {
+  color: #989898; /* placeholder 색상 */
+}
+
+.direct-add-textarea {
+  height: 420px;
+  padding: 60px 60px;
+  border: none;
+  outline: none;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 25px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  font-size: 26px;
+  color: #262626;
+  resize: none;
+}
+.direct-add-textarea::placeholder {
+  color: #989898; /* placeholder 색상 */
+}
+
+/* 색 표지 색상 */
+.direct-add-bookcover {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.direct-add-bookcover p {
+  font-size: 26px;
+  color: #262626;
+  margin-top: 24px;
+  margin-bottom: 18px;
+}
+
+.direct-add-cover-options {
+  display: flex;
+  gap: 10px;
+  justify-content: left;
+}
+
+.direct-add-cover-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+}
+
+.direct-add-cover-btn.blue {
+  background-color: #bed7ff;
+}
+.direct-add-cover-btn.yellow {
+  background-color: #fff2b2;
+}
+.direct-add-cover-btn.green {
+  background-color: #ecff9f;
+}
+.direct-add-cover-btn.white {
+  background-color: #fafafa;
+}
+
+/* 모달*/
+/* 첫번째 모달 */
+.add-modal-overlay1 {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.add-modal-box1 {
+  background: #fff;
+  border-radius: 20px;
+  width: 463px;
+  height: 324px;
+  max-width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.add-modal-box1 h3 {
+  font-size: 32px;
+  color: #262626;
+  font-weight: 550;
+  margin-top: 80px;
+}
+
+/* 모달 2번째 */
+.add-modal-overlay2 {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.add-modal-box2 {
+  width: 60%;
+  height: 64%;
+  background: #fff;
+  border-radius: 25px;
+  padding: 80px;
+  /* position: relative; */
+  position: relative;
+  box-shadow: 0px 0px 39px rgba(0, 0, 0, 0.21);
+}
+
+.add-modal-question {
+  font-weight: 550;
+  font-size: 32px;
+  color: #000;
+  margin-top: 0px;
+  margin-bottom: 108px;
+}
+
+.add-modal-close {
+  position: absolute;
+  top: 74px;
+  right: 80px;
+  background: transparent;
+  border: none;
+  font-size: 38px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 300;
+}
+
+.add-modal-content {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.add-title {
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 32px;
+  color: #262626;
+}
+
+.add-content {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.5;
+  color: #989898;
+}
+
+.add-btn-primary {
+  position: absolute;
+  bottom: 50px;
+  right: 80px;
+  height: 60px;
+  padding: 0px 71px;
+  background: #195fcf;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}

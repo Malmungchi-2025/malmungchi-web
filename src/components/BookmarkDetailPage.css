@@ -1,0 +1,94 @@
+.bookmarkdetail-wrapper {
+  margin: 0px 250px;
+}
+
+.bookmarkdetail-header {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.bookmarkdetail-prompt {
+  font-size: 26px;
+  color: #616161;
+  font-weight: 500;
+  margin: 0px 0px 5px 0px;
+}
+
+.bookmarkdetail-title {
+  font-size: 32px;
+  font-weight: 550;
+  color: #262626;
+  margin: 0px;
+}
+
+.bookmarkdetail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookmarkdetail-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 26px;
+  color: #616161;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+/* 아이콘 */
+.bookmarkdetail-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 26px;
+  color: #616161;
+}
+
+.icon {
+  font-size: 24px;
+  color: #616161;
+  transition: color 0.3s ease;
+}
+
+.icon:hover {
+  color: #ff4b4b;
+}
+
+.bookmarkdetail-body p {
+  margin-bottom: 12px;
+  color: #ddd;
+  white-space: pre-line;
+}
+
+.bookmarkdetail-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmarkdetail-content {
+  width: 1420px;
+  height: 610px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+  text-align: left;
+  overflow-y: auto;
+
+  /* 글자 */
+  padding-right: 60px;
+  padding-left: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #262626;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.4;
+}

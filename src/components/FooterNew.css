@@ -1,0 +1,53 @@
+/* Footer.css */
+.footerNew {
+  height: 285px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+.footerNew-wrapper {
+  width: 100%;
+  margin: 0px 250px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.footerNew-logo {
+  height: 26px;
+  margin-bottom: 40px;
+  object-fit: contain;
+}
+
+.footerNew-email {
+  font-size: 20px;
+  color: inherit;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footerNew-email-info {
+  font-size: 20px;
+  font-weight: 500;
+  color: #989898 !important;
+}
+
+.footerNew-email span {
+  color: inherit;
+}
+
+/* 구분선 */
+.footerNew-line {
+  margin-top: 24px;
+  border: none;
+  border-top: 1px solid rgba(97, 97, 97, 1);
+  width: 100%;
+}
+
+.footerNew-copy {
+  font-size: 16px;
+  color: #989898;
+  margin-top: 24px;
+}

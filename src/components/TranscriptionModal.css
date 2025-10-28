@@ -1,0 +1,66 @@
+/* 필사하기 모달 관련 */
+.transcription-modal-overlay {
+  position: absolute;
+  top: 64px; /* 아이콘 아래 간격 */
+  right: -26px; /* 우측 끝에 붙이기 */
+  background: transparent; /* 불필요한 배경 제거 */
+  width: auto;
+  height: auto;
+  z-index: 1000;
+}
+
+.transcription-modal-box {
+  background: #eff4fb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 143px;
+  height: 90px;
+  position: relative;
+}
+
+/* 화살표 */
+.transcription-modal-box::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 48px;
+  width: 43px;
+  height: 43px;
+  background: #eff4fb;
+  transform: rotate(45deg);
+  border-radius: 4px; /* 뭉툭하게 */
+  z-index: -1;
+}
+
+/* 텍스트 부분 */
+.transcription-modal-btn-01 {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding-top: 8px;
+  width: 100%;
+  cursor: pointer;
+  color: #616161;
+  padding-top: 12px;
+}
+
+.transcription-modal-btn-02 {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding-top: 8px;
+  width: 100%;
+  cursor: pointer;
+  color: #616161;
+  padding-top: 4px;
+}
+
+/* 밑줄 */
+.transcription-modal-box hr {
+  width: 100%; /* 모달 너비에 맞춤 */
+  height: 1px; /* 두께 */
+  border: none; /* 기본 선 제거 */
+  background: #ffffff; /* 원하는 색상 */
+}

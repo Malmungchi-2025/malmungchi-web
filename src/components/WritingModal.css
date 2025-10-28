@@ -1,0 +1,77 @@
+/* 글쓰기 모달 관련 */
+.writing-modal-overlay {
+  position: absolute;
+  top: 64px; /* 아이콘 아래 간격 */
+  right: -36px; /* 우측 끝에 붙이기 */
+  background: transparent; /* 불필요한 배경 제거 */
+  width: auto;
+  height: auto;
+  z-index: 1000;
+}
+
+.writing-modal-box {
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 143px;
+  height: 135px;
+  position: relative;
+}
+
+/* 화살표 */
+.writing-modal-box::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 48px;
+  width: 43px;
+  height: 43px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  border-radius: 4px; /* 뭉툭하게 */
+  z-index: -1;
+}
+
+/* 텍스트 부분 */
+.writing-modal-btn-01 {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding-top: 8px;
+  width: 100%;
+  cursor: pointer;
+  color: #262626;
+  padding-top: 12px;
+}
+
+.writing-modal-btn-02 {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding-top: 8px;
+  width: 100%;
+  cursor: pointer;
+  color: #262626;
+  padding-top: 4px;
+}
+
+.writing-modal-btn-03 {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding-top: 8px;
+  width: 100%;
+  cursor: pointer;
+  color: #262626;
+  padding-top: 4px;
+}
+
+/* 밑줄 */
+.writing-modal-box hr {
+  width: 100%; /* 모달 너비에 맞춤 */
+  height: 1px; /* 두께 */
+  border: none; /* 기본 선 제거 */
+  background: #fafafa; /* 원하는 색상 */
+}

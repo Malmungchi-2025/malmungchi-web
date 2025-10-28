@@ -1,0 +1,143 @@
+#root {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+}
+button {
+  font-family: inherit; /* 또는 같은 폰트 명시 */
+}
+/* 공통 */
+.login-modal-overlay {
+  position: absolute;
+  top: 72px; /* 아이콘 아래 간격 */
+  right: -50px; /* 우측 끝에 붙이기 */
+  background: transparent; /* 불필요한 배경 제거 */
+  width: auto;
+  height: auto;
+  z-index: 1000;
+}
+
+/* 공통 */
+.login-modal-box {
+  background: #fff;
+  border-radius: 10px;
+}
+
+/* 로그인 모달 */
+.login-modal-box.login {
+  width: 307px; /* 고정*/
+  height: 304px; /*고정*/
+}
+
+/* 꼬리 (CSS로 가능, 이미지 안 써도 됨) _공동 */
+.login-modal-box::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 48px;
+  width: 43px;
+  height: 43px;
+  background: white;
+  transform: rotate(45deg);
+  border-radius: 4px; /* 뭉툭하게 */
+}
+
+/* 로그인 모달 관련 */
+.login-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 가로 가운데 */
+  text-align: center;
+}
+
+.login-modal-content p {
+  color: #262626;
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 80px;
+  line-height: 1.6;
+}
+
+.login-modal-login-button {
+  margin-top: 15px;
+  width: 212px;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  background: #195fcf;
+  color: white;
+}
+
+/* 마이페이지 모달 부분 */
+.login-modal-box.mypage {
+  width: 260px; /* 고정*/
+  height: 412px; /*고정*/
+}
+
+.mypage-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mypage-modal-profileImg {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.mypage-modal-username {
+  font-size: 22px;
+  font-weight: 550;
+  color: #262626;
+}
+
+/* 학습게이지 */
+.mypage-modal-xp {
+  width: 84%;
+  font-size: 18px;
+  font-weight: 400;
+  color: #1a73e8;
+  margin-bottom: 40px;
+}
+
+.mypage-modal-xp-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+/* 학습 게이지 바 배경 */
+.xp-bar {
+  position: relative;
+  height: 12px;
+  background: #eff4fb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 학습 게이지바 진행률 */
+.xp-progress {
+  height: 100%;
+  background: #1a73e8;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.mypage-modal-logout-btn {
+  width: 220px;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+
+  background: #f7f7f7;
+  color: #616161;
+}

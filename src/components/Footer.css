@@ -1,0 +1,56 @@
+/* Footer.css */
+.footer {
+  background-color: rgba(38, 38, 38, 1);
+  height: 305px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.footer .social-container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.footer .social-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; /*아이콘과 텍스트 간격 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.footer .social-container a {
+  /* 동그라미 원 속성 */
+  width: 51px;
+  height: 51px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 아이콘 속성 */
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer .social-container a:hover {
+  color: #ddd;
+}
+
+.footer .social-container p {
+  color: #fff;
+  font-size: 18px;
+  margin: 0px;
+}
+
+.footer .copyright {
+  color: rgb(97, 97, 97);
+  font-size: 18px;
+  margin-top: 40px;
+}

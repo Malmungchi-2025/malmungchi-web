@@ -1,0 +1,87 @@
+.article-wrapper {
+  padding-left: 250px;
+  text-align: left;
+  margin-top: 80px;
+}
+.article-wrapper h2 {
+  color: white;
+  font-size: 32px;
+  font-weight: 550;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+.card-slider {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 20px;
+  padding: 40px 0;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+
+.card {
+  background-color: white;
+  color: black;
+  width: 460px;
+  height: 574px;
+  /* padding: 20px; */
+  border-radius: 8px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.header {
+  height: 52px;
+  padding: 15px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+
+.card-header {
+  font-size: 14px;
+  color: rgba(97, 97, 97, 1);
+  margin-bottom: 10px;
+}
+
+.card-created {
+  font-size: 12px;
+  color: rgb(233, 233, 231);
+}
+
+.content {
+  padding: 40px;
+  padding-top: 40px;
+  height: 502px;
+  background-image: url("../../public/images/quote.png");
+  background-repeat: no-repeat;
+  background-position: 20px 5px;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 550;
+  color: rgba(97, 97, 97, 1);
+  margin-bottom: 20px;
+}
+
+.card-content {
+  font-size: 18px;
+  color: rgba(97, 97, 97, 1);
+  line-height: 1.5;
+  /* height: 90px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  display: -webkit-box;
+  -webkit-line-clamp: 13;
+  -webkit-box-orient: vertical;
+  /* max-height: calc(1.5em * 6); */
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 15px;
+}

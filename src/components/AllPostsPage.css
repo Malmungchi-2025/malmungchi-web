@@ -1,0 +1,520 @@
+/* 3D 영역 */
+.allpostpage-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding-top: 100px;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+.allpostpage-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.allposts-wrapper {
+  text-align: center;
+  color: #fff;
+  background-color: #262626;
+  padding: 80px 0px 0px 0px;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+  box-sizing: border-box;
+}
+
+/* 이달의 작품 */
+.allposts-title {
+  font-size: 32px;
+  font-weight: 550;
+  color: #ffffff;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.carousel {
+  margin-top: 20px;
+  position: relative;
+  height: 610px;
+  perspective: 1600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: 10px; */
+  /* 여기서 마진을 줘야할 것 같은데 아마 사이 간격들 때문에 안되는 것 같음. */
+  padding: 0 100px;
+  overflow: hidden;
+}
+
+.allposts-card {
+  position: relative;
+  width: 424px;
+  height: 460px;
+  background: #fff;
+  color: #616161;
+  border-radius: 8px;
+  box-shadow: 0 0px 26px rgba(0, 0, 0, 0.4);
+  transition: transform 0.8s ease, opacity 0.6s ease;
+  transform-style: preserve-3d;
+  /* 활성화 안된 카드들 */
+  opacity: 0.7;
+  cursor: pointer;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.allposts-card.active {
+  transform: translateZ(100px) scale(1.1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.allposts-card.left {
+  transform: translateX(-10px) rotateY(35deg) scale(0.85);
+  z-index: 1;
+}
+
+.allposts-card.right {
+  transform: translateX(10px) rotateY(-35deg) scale(0.85);
+  z-index: 1;
+}
+
+/* 카드 꾸미기 */
+.allposts-card-inner {
+  padding: 0px;
+  text-align: left;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 카드 상단 영역 */
+.allposts-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  border-radius: 8px;
+  background: #f7f7f7;
+}
+
+/* 카드 상단 - 왼쪽 정보 */
+.allposts-card-meta-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 5px;
+}
+
+.allposts-card-author {
+  font-size: 16px;
+  font-weight: 500;
+  color: #616161;
+}
+
+.allposts-card-date {
+  font-size: 12px;
+  color: #989898;
+}
+
+/* 카드 상단 - 오른쪽 정보 */
+.allposts-card-meta-right {
+  display: flex;
+  gap: 10px;
+}
+
+.allposts-card-icon-group {
+  /* 폰트 부분 */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #616161;
+}
+
+.allposts-card-icon {
+}
+
+/*  카드 본문 영역 */
+.allposts-card-body {
+  padding-left: 30px;
+  padding-right: 30px;
+  flex: 1;
+  text-align: left;
+  transform: translateZ(0);
+}
+
+.allposts-card-body h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #616161;
+}
+
+.allposts-card-body p {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #616161;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* 표시할 최대 줄 수 */
+  -webkit-line-clamp: 11;
+  -webkit-box-orient: vertical;
+}
+
+/* 화살표 부분 */
+/* .allposts-card-more-text {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 0px;
+} */
+
+/* 아래로 스크롤 버튼 */
+.allposts-down-btn {
+  margin-top: 10px;
+  cursor: pointer;
+  animation: bounce 1.6s infinite;
+}
+
+.allposts-scroll-icon {
+  width: 70px;
+  height: 70px;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.scroll-icon:hover {
+  transform: scale(1.1);
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* ▼ 두 번째 섹션 */
+.allposts-second-section {
+  background-color: #ffffff;
+  color: #262626;
+  /* padding: 120px 80px; */
+  /* text-align: center; */
+  min-height: 90vh;
+}
+
+.allposts-second-inner {
+  padding-top: 30px;
+  margin: 0px 250px;
+}
+
+.allposts-lower-inner h2 {
+  font-size: 32px;
+  font-weight: 550;
+  color: #262626;
+  margin-bottom: 40px;
+}
+/* 여기까지 일단 노 건들 */
+
+/* ✅ 전체 그리드 구조 (1+4 레이아웃) */
+.allposts-popular-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+  margin-bottom: 0px;
+}
+
+/* ✅ 박스 공통 스타일 */
+.allposts-popular-box {
+  position: relative; /* ✅ 기준점 */
+  border-radius: 16px;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.allposts-popular-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ✅ 첫 번째 박스(가장 큰 블록) */
+.allposts-popular-box.main {
+  grid-row: span 2;
+  grid-column: 1 / 2;
+  aspect-ratio: 0.8 / 1; /* 세로를 살짝 더 늘림 */
+  max-height: 690px;
+  padding: 80px 60px; /* 내부 여백도 비율에 맞게 살짝 줄임 */
+  box-sizing: border-box;
+}
+
+.allposts-popular-box.sub {
+  aspect-ratio: 1.2 / 1; /* 세로 비율 통일 (약간 길게) */
+  max-height: 345px; /* 세로 크기 제한 */
+  padding: 60px 50px;
+  box-sizing: border-box;
+}
+
+/* 메인 카드 텍스트 스타일 */
+.allposts-popular-date {
+  font-size: 32px;
+  color: #262626;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.allposts-popular-title {
+  font-size: 48px;
+  font-weight: 600;
+  color: #262626;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.allposts-popular-author {
+  position: absolute;
+  bottom: 80px; /* 여백 조절 */
+  right: 60px;
+  font-size: 48px;
+  color: #262626;
+  font-weight: 600;
+  margin: 0px;
+}
+
+/* 작은 카드 텍스트 스타일 */
+.allposts-popular-date-s {
+  font-size: 18px;
+  color: #262626;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.allposts-popular-title-s {
+  font-size: 26px;
+  font-weight: 600;
+  color: #262626;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.allposts-popular-author-s {
+  position: absolute;
+  bottom: 50px; /* 여백 조절 */
+  right: 60px;
+  font-size: 22px;
+  color: #262626;
+  font-weight: 600;
+  margin: 0px;
+}
+
+/* ===================================== */
+/* ▼ 오버레이 적용 */
+/* ===================================== */
+.allposts-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* ✅ 위쪽 정렬 */
+  align-items: flex-start; /* ✅ 왼쪽 정렬로 변경 */
+  color: #fff;
+  transition: opacity 0.2s ease;
+  text-align: left;
+  border-radius: 16px;
+}
+
+.allposts-popular-box:hover .allposts-card-overlay {
+  opacity: 1;
+}
+
+/* ✅ 본문 내용 */
+.allposts-overlay-content {
+  font-size: 22px;
+  line-height: 1.8;
+  margin: 0px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ✅ 아이콘 영역 */
+.allposts-overlay-icons {
+  position: absolute;
+  display: flex;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.allposts-overlay-icons span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ✅ 메인 카드용 크기 조정 */
+.main-overlay .allposts-overlay-content {
+  font-size: 26px;
+  padding: 80px 60px;
+}
+
+.main-overlay .allposts-overlay-icons {
+  right: 60px; /* 오른쪽 여백 */
+  bottom: 80px; /* 아래 여백 */
+  font-size: 26px;
+  gap: 20px;
+}
+
+/* ✅ 서브 카드용 크기 조정 */
+.sub-overlay .allposts-overlay-content {
+  font-size: 22px;
+  padding: 60px 50px;
+}
+
+.sub-overlay .allposts-overlay-icons {
+  right: 60px; /* 오른쪽 여백 */
+  bottom: 50px; /* 아래 여백 */
+  font-size: 18px;
+  gap: 12px;
+}
+
+/* ===================================== */
+/* ▼ 최신글 영역 스타일 */
+/* ===================================== */
+.allposts-latest-section {
+  background-color: #ffffff;
+  color: #262626;
+  padding-bottom: 160px;
+}
+
+.allposts-latest-inner {
+  margin: 0 250px;
+}
+
+.allposts-latest-title {
+  font-weight: 550;
+  color: #262626;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* 검색창 */
+.allposts-search-bar {
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  padding: 30px 50px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.allposts-search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 26px;
+  color: #616161;
+  font-weight: 500;
+}
+
+.allposts-search-icon {
+  font-size: 24px;
+  color: #616161;
+  cursor: pointer;
+}
+
+/* 테이블 */
+.allposts-list-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.allposts-list-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  align-items: center;
+  padding: 30px 60px;
+  /* border-radius: 6px; */
+  background-color: #eff4fb;
+  color: #262626;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.allposts-list-row:hover {
+  background-color: #eaf0fb;
+}
+
+.allposts-list-col {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.allposts-list-col.title {
+  font-weight: 500;
+}
+
+.allposts-list-col.icons {
+  display: flex; /* 가로 정렬 */
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px; /* ✅ 하트-북마크 사이 간격 */
+}
+
+/* 각각의 아이콘+숫자 묶음 */
+.allposts-list-col.icons span {
+  /* display: flex;
+  align-items: center;
+  gap: 5px;  */
+  font-size: 22px;
+  color: #262626;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px; /* 아이콘과 숫자 간 간격 */
+  font-variant-numeric: tabular-nums;
+}
+
+/* 실제 아이콘 */
+.allposts-list-icon-spartate {
+  font-size: 22px; /* 아이콘 크기 조절 */
+  color: #262626; /* 아이콘 색상 (원하면 변경 가능) */
+  vertical-align: middle;
+}
+
+/* 페이지네이션 */
+.allposts-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  margin-top: 40px;
+  color: #616161;
+}
+
+.allposts-pagination span {
+  cursor: pointer;
+  /* padding: 4px 10px; */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.allposts-pagination span:hover,
+.allposts-pagination .active {
+  color: #1c64f2;
+  font-weight: 600;
+}

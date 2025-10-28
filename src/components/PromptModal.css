@@ -1,0 +1,56 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 충분히 높은 수치 */
+}
+
+.modal-box {
+  width: 778px;
+  height: 456px;
+  background-color: white;
+  color: black; /* ✨ 텍스트 보이게 */
+  border-radius: 25px;
+  padding: 60px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+}
+
+.modal-label {
+  font-size: 24px;
+  color: rgba(152, 152, 152, 1);
+  margin-top: 80px;
+  margin-bottom: 30px;
+}
+
+.modal-word {
+  font-size: 64px;
+  font-weight: bold;
+  color: black;
+  margin: 0;
+}
+
+.modal-meaning {
+  font-size: 32px;
+  color: black;
+  margin-top: 60px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}

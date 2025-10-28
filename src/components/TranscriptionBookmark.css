@@ -1,0 +1,122 @@
+.bookmark-page {
+  margin-top: 100px;
+  padding-left: 250px;
+  padding-right: 250px;
+  padding-bottom: 124px;
+  min-height: calc(100vh - 100px); /* 네비바 제외 영역 */
+  overflow-y: auto;
+  background: #ffffff;
+  /* box-sizing: border-box; */
+}
+
+.bookmark-title {
+  font-size: 32px;
+  font-weight: 550;
+  margin-bottom: 24px;
+  color: #616161;
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 300px); /* 한 줄에 4개, 각각 340px */
+  column-gap: 66px; /* 좌우 간격 */
+  row-gap: 20px; /* 위아래 간격 */
+  justify-content: center; /* 화면 가운데 정렬 */
+}
+
+.bookmark-card {
+  position: relative; /* 오버레이 배치 기준 */
+  width: 340px;
+  height: 400px;
+  background: #eff4fb;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  /* 패딩 포함하여 크기 고정 */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* 고전문학 카드 전용 */
+.bookmarkcard-classic-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 직접추가 카드 전용 */
+.bookmarkcard-custom {
+  background: #eff4fb; /* 추후 직접 선택한 색상 적용 예정 */
+  padding: 40px;
+}
+
+/* 공통 정보 레이어 */
+.bookmarkcard-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  z-index: 1;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.bookmarkcard-date {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.bookmarkcard-title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-top: 2px;
+  margin-bottom: 180px;
+}
+
+.bookmarkcard-author {
+  font-size: 22px;
+  font-weight: 550;
+  text-align: right;
+}
+
+/* 📌 기본 텍스트 색상 */
+.bookmarkcard-classic .bookmarkcard-info {
+  opacity: 0; /* hover 전 투명 */
+  color: #fff; /* hover 시 흰색으로 나타남 */
+}
+
+.bookmarkcard-custom .bookmarkcard-info {
+  opacity: 1; /* 항상 보임 */
+  color: #262626; /* 기본 검은색 */
+}
+
+/* 오버레이 (공통) */
+.bookmark-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+}
+
+/* hover 효과 */
+.bookmark-card:hover::after {
+  opacity: 1;
+}
+
+.bookmarkcard-classic:hover .bookmarkcard-info {
+  opacity: 1; /* hover 시 글자 보이게 */
+}
+
+.bookmarkcard-custom:hover .bookmarkcard-info {
+  color: #fff; /* hover 시 흰색 */
+}

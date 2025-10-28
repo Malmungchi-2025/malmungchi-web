@@ -1,0 +1,18 @@
+# --- 기본 Node/React ---
+node_modules/
+build/
+dist/
+
+# --- 환경 변수 파일 ---
+.env
+.env.local
+.env.production
+.env.development
+
+# --- 서버 폴더 통째로 제외 ---
+server/
+
+# --- 기타 ---
+.DS_Store
+npm-debug.log
+yarn-error.log

@@ -1,0 +1,95 @@
+/* 글감 페이지 스타일 */
+.prompt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* 글 배치 */
+  padding: 194px 40px 0px 40px;
+}
+
+/* 글감 제목 */
+.prompt-title {
+  font-size: 32px;
+  color: rgba(97, 97, 97, 1);
+  margin-top: 0px;
+  margin-bottom: 50px;
+  font-weight: 550;
+}
+
+/* 글감 텍스트 */
+.prompt-text {
+  font-size: 64px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 0px;
+  text-align: center;
+}
+
+/* 글감 뜻 텍스트 */
+.prompt-meaning {
+  font-size: 48px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 0px;
+  text-align: center;
+  /* transition: opacity 0.5s; */
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+  display: flex;
+  position: absolute;
+  gap: 30px;
+  bottom: 240px; /* 버튼을 항상 고정 위치로 */
+  z-index: 1;
+}
+
+/* 버튼 스타일 */
+.btn {
+  /* 버튼 크기 고정 */
+  width: 220px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  font-size: 22px;
+  font-weight: 550;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* 버튼 호버 효과 */
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* 더 밝은 효과 */
+}
+
+/* 페이드 효과 */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

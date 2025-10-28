@@ -1,0 +1,180 @@
+.copymaincontainer {
+  display: flex;
+  flex-direction: column;
+  /* padding-top: 100px; */
+  padding-bottom: 100px;
+  background-attachment: fixed;
+}
+.hero-center {
+  position: relative;
+  z-index: 1; /* 어둡게 레이어 위로 */
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 0 122px;
+  margin-top: 100px;
+}
+
+/* 사람 아이콘 */
+.hero-icon {
+  width: 159px;
+  height: auto;
+  margin-bottom: 50px;
+}
+
+/* 타이틀 */
+.hero-title {
+  font-weight: 700;
+  font-size: 64px;
+}
+
+/* 버튼 그룹 */
+.hero-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 84px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 버튼 */
+.btn-recommend {
+  height: 60px;
+  padding: 0px 71px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 22px;
+
+  border: none;
+  cursor: pointer;
+  background: #195fcf;
+  color: #fff;
+}
+
+.btn-recommend:hover {
+}
+
+/* 외곽선 버튼 */
+.btn-plus {
+  height: 60px;
+  padding: 0px 71px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 22px;
+
+  border: none;
+  cursor: pointer;
+  background: #fafafa;
+  color: #262626;
+}
+
+.btn-plus:hover {
+}
+
+/* 모달 부분 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.book-modal {
+  width: 60%;
+  height: 64%;
+  background: #fff;
+  border-radius: 25px;
+  padding: 80px;
+  position: relative;
+  box-shadow: 0px 0px 39px rgba(0, 0, 0, 0.21);
+}
+
+.modal-question {
+  font-weight: 550;
+  font-size: 32px;
+  color: #000;
+  margin: 0px;
+}
+
+.book-info {
+  display: flex;
+  margin-top: 60px;
+  margin-bottom: 62px;
+  gap: 40px;
+}
+
+.book-cover {
+  width: 304px;
+  height: auto;
+  /* flex-shrink: 0; */
+  position: relative;
+  z-index: 1;
+}
+
+.book-text {
+  flex: 1;
+  height: 421px;
+}
+
+.book-title {
+  font-weight: 400;
+  margin-bottom: 40px;
+  font-size: 32px;
+  color: #262626;
+}
+
+.book-content {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.5;
+  color: #989898;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.btn-secondary {
+  height: 60px;
+  padding: 0px 71px;
+  background: #fafafa;
+  color: #262626;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  height: 60px;
+  padding: 0px 71px;
+  background: #195fcf;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.modal-close {
+  position: absolute;
+  top: 74px;
+  right: 80px;
+  background: transparent;
+  border: none;
+  font-size: 38px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 300;
+}

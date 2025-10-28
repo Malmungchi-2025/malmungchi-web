@@ -1,0 +1,228 @@
+/* MainPage.css */
+.main-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* 섹션 스타일 */
+/* .section {
+  height: 100vh;
+  padding: 120px 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #195fcf;
+  transition: background-color 0.3s;
+} */
+
+.section1 {
+  height: 100vh;
+  padding-top: 100px; /* 네비바 공간 확보 */
+  box-sizing: border-box;
+  background-color: #195fcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  color: white;
+}
+
+/* 중앙 텍스트 */
+.hero-text h2 {
+  white-space: pre-line;
+  font-size: 64px;
+  line-height: 1.5;
+  z-index: 1;
+}
+
+/* 왼쪽 말치 이미지 */
+.hero-left-img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 900px;
+  z-index: 0;
+}
+
+/* 오른쪽 뭉치 이미지 */
+.hero-right-img {
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  height: 900px;
+  z-index: 0;
+}
+
+/* section2 */
+.section2 {
+  height: 100vh;
+  padding-top: 100px; /* 네비바 공간 확보 */
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* section3 */
+.section3 {
+  height: 100vh;
+  padding-top: 100px; /* 네비바 공간 확보 */
+  box-sizing: border-box;
+  background-color: #eff4fb;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* section4 */
+.section4 {
+  height: 100vh;
+  padding-top: 100px; /* 네비바 공간 확보 */
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.image4 img {
+  width: 300px;
+  height: auto;
+  padding-right: 250px;
+}
+
+/* Section 4 전용 레이아웃 */
+.special-layout .main_content {
+  flex-direction: row-reverse;
+}
+
+/* ↑ 버튼 스타일 */
+.scroll-up {
+  position: absolute;
+  bottom: 120px;
+  right: 200px;
+  font-size: 68px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.scroll-up.blue-arrow {
+  color: #195fcf;
+}
+
+.main_content {
+  min-height: calc(100vh - 100px);
+  /* max-width: 1200px; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: none;
+  padding-left: 250px;
+  padding-right: 160px;
+}
+
+.main_text {
+  max-width: 50%;
+}
+.main_text h2 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  white-space: pre-line;
+}
+.main_text p {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 60px;
+}
+
+.main_text button {
+  background-color: #195fcf;
+  color: white;
+  padding: 15px 50px;
+  font-size: 22px;
+  font-weight: 500;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.main_text button:hover {
+  background-color: #144aad;
+}
+
+.image img {
+  width: 860px;
+  height: auto;
+}
+
+/* 아래로 스크롤 버튼 */
+.scroll-down {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* 아래로 버튼 색상 분기 */
+.white-arrow {
+  color: #fff;
+}
+
+.blue-arrow {
+  color: #195fcf;
+}
+
+/* 01/03 인디케이터 */
+.section-indicator {
+  position: absolute;
+  bottom: 60px;
+  right: 200px;
+  font-size: 32px;
+  color: #f7f7f7;
+  font-weight: 550;
+  z-index: 2;
+}
+
+.section-indicator span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* 인디케이터 색상 지정 */
+.white-indicator {
+  color: #fff;
+}
+
+.blue-indicator {
+  color: #000;
+}
+
+.section2,
+.section3,
+.section4 {
+  position: relative;
+}

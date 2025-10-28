@@ -1,0 +1,145 @@
+.writingbookmark-page {
+  margin-top: 100px;
+  padding-left: 250px;
+  padding-right: 250px;
+  padding-bottom: 124px;
+  min-height: calc(100vh - 100px); /* 네비바 제외 영역 */
+  overflow-y: auto;
+  background: #262626;
+  /* box-sizing: border-box; */
+}
+
+.writingbookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 300px); /* 카드 4개 */
+  column-gap: 66px; /* 좌우 간격 */
+  row-gap: 20px; /* 위아래 간격 */
+  justify-content: center; /* 화면 가운데 정렬 */
+}
+
+.writingbookmark-card {
+  position: relative;
+  width: 340px;
+  height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 40px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 0;
+  transition: transform 0.2s ease;
+  /* justify-content: space-between; */
+}
+
+.writingbookmarkcard-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  z-index: 2;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.writingbookmark-date {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+
+  font-size: 18px;
+  color: #262626;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.writingbookmark-title-text {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: 20%;
+  color: #262626;
+  font-size: 26px;
+  font-weight: 500;
+  margin-top: 2px;
+  margin-bottom: 180px;
+}
+
+.writingbookmark-author {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  font-size: 22px;
+  font-weight: 550;
+  color: #262626;
+  text-align: right;
+}
+
+/* 🔹 탭 컨테이너 */
+.writingbookmark-tabs {
+  display: flex;
+  flex-direction: row; /* ✅ 가로 배치 */
+  justify-content: left;
+  align-items: center;
+  gap: 20px; /* 탭 간격 */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 🔹 탭 기본 스타일 */
+.writingbookmark-tab {
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 500;
+  color: #616161; /* 비활성화 시 회색 */
+  transition: color 0.3s ease;
+}
+
+/* 🔹 활성화된 탭 */
+.writingbookmark-tab.active {
+  color: #ffffff; /* ✅ 활성화 시 흰색 */
+  font-weight: 500; /* ✅ 강조 */
+  border: none; /* ✅ 밑줄 제거 */
+}
+
+/* 🔹 구분선 스타일 */
+.divider {
+  color: #616161;
+  font-size: 26px;
+  user-select: none; /* 드래그 방지 */
+}
+
+// 호버시
+.writingbookmark-card:hover {
+  transform: translateY(-5px);
+}
+
+.writingbookmark-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+/* hover 효과 */
+.writingbookmark-card:hover::after {
+  opacity: 1;
+}
+
+/* 글씨 */
+.writingbookmark-card .writingbookmarkcard-info {
+  opacity: 1; /* hover 전 투명 */
+}
+
+.writingbookmark-card:hover .writingbookmark-date,
+.writingbookmark-card:hover .writingbookmark-title-text,
+.writingbookmark-card:hover .writingbookmark-author {
+  color: #fff;
+}
