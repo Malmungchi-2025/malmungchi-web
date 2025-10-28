@@ -139,7 +139,7 @@
 }
 
 .overlay-text {
-  pointer-events: none; /* ✅ overlay는 입력 방해 안 함 */
+  pointer-events: none; /* overlay는 입력 방해 안 함 */
 }
 
 /* 라이트모드_필사 박스 */
@@ -175,7 +175,7 @@
   line-height: 1.6;
 }
 
-/* 1) 회색 베이스(원문 내용) */
+/* 회색 베이스(원문 내용) */
 /* 라이트 모드 */
 .ghost-text {
   color: #989898;

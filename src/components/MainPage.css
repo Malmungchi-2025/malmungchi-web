@@ -108,7 +108,7 @@
   flex-direction: row-reverse;
 }
 
-/* ↑ 버튼 스타일 */
+/* 버튼 스타일 */
 .scroll-up {
   position: absolute;
   bottom: 120px;
@@ -196,7 +196,7 @@
   color: #195fcf;
 }
 
-/* 01/03 인디케이터 */
+/* 인디케이터 */
 .section-indicator {
   position: absolute;
   bottom: 60px;

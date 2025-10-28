@@ -53,7 +53,6 @@
   padding: 40px;
   padding-top: 40px;
   height: 502px;
-  background-image: url("../../public/images/quote.png");
   background-repeat: no-repeat;
   background-position: 20px 5px;
 }
@@ -76,7 +75,6 @@
   display: -webkit-box;
   -webkit-line-clamp: 13;
   -webkit-box-orient: vertical;
-  /* max-height: calc(1.5em * 6); */
 }
 
 .card-footer {

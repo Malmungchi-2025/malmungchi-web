@@ -16,7 +16,7 @@ function WritingPage({ backgroundStyle }) {
   // 네비게이션 바 색상 전달
   const navBg = "rgba(0, 0, 0, 0.8)";
   const textColor = "#E0E0E0";
-  const logoSrc = "/images/logo_w.png";
+  const logoSrc = "./images/logo_w.png";
 
   //  변수 작성
   //

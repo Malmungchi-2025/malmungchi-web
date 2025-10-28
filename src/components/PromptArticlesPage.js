@@ -72,7 +72,14 @@ function PromptArticlesPage({ backgroundStyle }) {
                     <div className="card-header">사용자 설정 별명</div>
                     <div className="card-created">2025.06.09</div>
                   </div>
-                  <div className="content">
+                  <div
+                    className="content"
+                    style={{
+                      backgroundImage: `url(${
+                        process.env.PUBLIC_URL + "/images/quote.png"
+                      })`,
+                    }}
+                  >
                     <div className="card-title">{item.title}</div>
                     <div className="card-content">“{item.content}”</div>
                   </div>

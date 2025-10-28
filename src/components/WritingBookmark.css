@@ -78,10 +78,10 @@
   text-align: right;
 }
 
-/* 🔹 탭 컨테이너 */
+/* 탭 컨테이너 */
 .writingbookmark-tabs {
   display: flex;
-  flex-direction: row; /* ✅ 가로 배치 */
+  flex-direction: row; /* 가로 배치 */
   justify-content: left;
   align-items: center;
   gap: 20px; /* 탭 간격 */
@@ -89,7 +89,7 @@
   margin-bottom: 10px;
 }
 
-/* 🔹 탭 기본 스타일 */
+/* 탭 기본 스타일 */
 .writingbookmark-tab {
   cursor: pointer;
   font-size: 32px;
@@ -98,21 +98,21 @@
   transition: color 0.3s ease;
 }
 
-/* 🔹 활성화된 탭 */
+/* 활성화된 탭 */
 .writingbookmark-tab.active {
-  color: #ffffff; /* ✅ 활성화 시 흰색 */
-  font-weight: 500; /* ✅ 강조 */
-  border: none; /* ✅ 밑줄 제거 */
+  color: #ffffff; /* 활성화 시 흰색 */
+  font-weight: 500; /*  강조 */
+  border: none; /*  밑줄 제거 */
 }
 
-/* 🔹 구분선 스타일 */
+/*  구분선 스타일 */
 .divider {
   color: #616161;
   font-size: 26px;
   user-select: none; /* 드래그 방지 */
 }
 
-// 호버시
+/* 호버시 */
 .writingbookmark-card:hover {
   transform: translateY(-5px);
 }
