@@ -21,6 +21,7 @@
   overflow-x: hidden;
   height: calc(100vh - 100px);
   box-sizing: border-box;
+  min-height: 700px;
 }
 
 /* 이달의 작품 */
@@ -35,7 +36,8 @@
 .carousel {
   margin-top: 20px;
   position: relative;
-  height: 610px;
+  /* height: 610px; */
+  height: clamp(480px, 60vh, 610px);
   perspective: 1600px;
   display: flex;
   justify-content: center;

@@ -106,7 +106,8 @@
 .book-info {
   display: flex;
   margin-top: 60px;
-  margin-bottom: 62px;
+  /* margin-bottom: 62px; */
+  margin-bottom: 32px;
   gap: 40px;
 }
 
@@ -135,12 +136,15 @@
   font-size: 32px;
   line-height: 1.5;
   color: #989898;
+  margin-bottom: 0px;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 .btn-secondary {
