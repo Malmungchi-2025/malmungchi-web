@@ -267,13 +267,24 @@
 /* 모달 상자 */
 /* 라이트 모드 */
 .middleout-modal-box {
-  background: #fff;
+  /* background: #fff;
   border-radius: 20px;
   width: 720px;
   height: 400px;
   max-width: 90%;
   text-align: center;
+  position: relative; */
+
+  background: #fff;
+  border-radius: 20px;
+  width: 720px;
+  max-width: 90%;
+  max-height: 85vh; /* ✅ 노트북 화면 기준으로 높이 제한 */
+  text-align: center;
   position: relative;
+  padding: 60px 30px 40px; /* ✅ 내부 여백 조정 */
+  box-sizing: border-box;
+  overflow-y: auto; /* ✅ 내용 넘칠 경우 스크롤 */
 }
 /* 다크 모드 */
 .middleout-modal-overlay.dark .middleout-modal-box {
@@ -286,7 +297,8 @@
   font-size: 32px;
   color: #262626;
   font-weight: 550;
-  margin-top: 80px;
+  /* margin-top: 80px; */
+  margin-top: 20px; /* ✅ 여백 축소 */
 }
 /* 다크 모드 */
 .middleout-modal-overlay.dark .middleout-modal-box h3 {
@@ -310,7 +322,8 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  margin-top: 30px; /* ✅ 여백 축소 */
 }
 
 /* 중단하기 버튼 */
