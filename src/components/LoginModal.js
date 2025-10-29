@@ -36,7 +36,7 @@ function LoginModal({ onClose }) {
           // 로그인 된 경우 : 마이페이지
           <div className="mypage-modal-content">
             <img
-              src={user.profileImage || "/images/login_basic_profil.png"}
+              src={user.profileImage || "/images/profilImage2.png"}
               alt="프로필"
               className="mypage-modal-profileImg"
             />
@@ -45,8 +45,8 @@ function LoginModal({ onClose }) {
             {/* 학습 게이지 영역 */}
             <div className="mypage-modal-xp">
               <div className="mypage-modal-xp-info">
-                <span className="xp-label">학습게이지</span>
-                <span className="xp-value">{user.point ?? 0}XP</span>
+                <span className="xp-label">학습포인트</span>
+                <span className="xp-value">{user.point ?? 420}XP</span>
               </div>
               <div className="xp-bar">
                 <div className="xp-progress" style={{ width: "40%" }}></div>
