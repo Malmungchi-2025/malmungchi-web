@@ -92,12 +92,17 @@ export default function TranscriptionPage() {
   const paragraph = pages[pageIdx] || "";
   const typed = typedByPage[pageIdx] || "";
 
-  //
   // 사용자가 필사영역(contentEditable)에 글을 작성할 때 실행되는 핸들러
   const onInput = () => {
     // 필사 영역에 들어온 텍스트를 가져옴
+    // const text = editorRef.current?.innerText ?? "";
+    // setTypedByPage((prev) => {
+    //   const next = [...prev];
+    //   next[pageIdx] = text;
+    //   return next;
+    // });
+    if (isComposing.current) return; // 조합 중엔 업데이트 안 함
     const text = editorRef.current?.innerText ?? "";
-    // typedByPage 배열에 작성된 내용 업데이트
     setTypedByPage((prev) => {
       const next = [...prev];
       next[pageIdx] = text;
@@ -122,10 +127,69 @@ export default function TranscriptionPage() {
   const user = normalize(typed).slice(0, paragraph.length);
   const src = normalize(paragraph);
 
+  // 중간 이후 추가됨.
+  // ✅ 한글 조합 중 여부 감지 + 커서 위치 복원
+  const isComposing = useRef(false);
+
+  useEffect(() => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const handleStart = () => (isComposing.current = true);
+
+    const handleEnd = () => {
+      isComposing.current = false;
+
+      // 조합이 끝난 뒤에만 내용 갱신
+      const text = editorRef.current?.innerText ?? "";
+      setTypedByPage((prev) => {
+        const next = [...prev];
+        next[pageIdx] = text;
+        return next;
+      });
+
+      // ✅ 커서를 작성 중인 글 바로 뒤로 복원
+      requestAnimationFrame(() => {
+        const sel = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(editorRef.current);
+        range.collapse(false); // 끝부분으로 커서 이동
+        sel.removeAllRanges();
+        sel.addRange(range);
+      });
+    };
+
+    editor.addEventListener("compositionstart", handleStart);
+    editor.addEventListener("compositionend", handleEnd);
+
+    return () => {
+      editor.removeEventListener("compositionstart", handleStart);
+      editor.removeEventListener("compositionend", handleEnd);
+    };
+  }, [pageIdx]);
+
   // 공백과 줄바꿈을 같은 토큰으로 처리
+  // 중간 이후 변경된 부분
+  // const overlayText = src
+  //   .split("")
+  //   .map((ch, i) => (user[i] === ch ? ch : " "))
+  //   .join("");
   const overlayText = src
     .split("")
-    .map((ch, i) => (user[i] === ch ? ch : " ")) // 맞으면 표시, 틀리면 빈칸
+    .map((ch, i) => {
+      // 조합 중에는 비교하지 않고 회색 유지
+      if (isComposing.current) {
+        return `<span style="color: #ccc; font-weight: 400;">${ch}</span>`;
+      }
+
+      if (user[i] === ch) {
+        return `<span style="color: #000; font-weight: 400;">${ch}</span>`; // 일치 → 검은색
+      } else if (user[i]) {
+        return `<span style="color: #ff3b30; font-weight: 400;">${ch}</span>`; // 오타 → 빨강
+      } else {
+        return `<span style="color: #ccc; font-weight: 400;">${ch}</span>`; // 입력 전
+      }
+    })
     .join("");
 
   const goPrev = () => setPageIdx((i) => Math.max(0, i - 1));
@@ -318,9 +382,12 @@ export default function TranscriptionPage() {
                 <div className="ghost-text">{paragraph}</div>
 
                 {/* 검정 오버레이(쓴 부분만) */}
-                <div className="overlay-text" aria-hidden="true">
-                  {overlayText}
-                </div>
+                <div
+                  className="overlay-text"
+                  aria-hidden="true"
+                  // 중간 이후 추가
+                  dangerouslySetInnerHTML={{ __html: overlayText }}
+                ></div>
 
                 {/* 투명 에디터(실제 입력) */}
                 <div

@@ -133,31 +133,76 @@ function WritingPage({ backgroundStyle }) {
 
   // 교체하기 버튼을 누르면 실행되는 함수
   // 다시 공부 및 정리하기
-  const handleReplaceText = (original, corrected) => {
-    const alreadyReplaced = replacedMap[original];
+  // const handleReplaceText = (original, corrected) => {
+  //   const alreadyReplaced = replacedMap[original];
 
-    let updatedText;
+  //   let updatedText;
+  //   if (alreadyReplaced) {
+  //     // 되돌리기
+  //     updatedText = content.replaceAll(corrected, original);
+  //     editorRef.current.innerHTML = updatedText;
+  //     setReplacedMap((prev) => ({ ...prev, [original]: false }));
+  //   } else {
+  //     // 교체하기
+  //     updatedText = content.replaceAll(
+  //       original,
+  //       `<span style="color:#1E90FF;">${corrected}</span>`
+  //     );
+  //     editorRef.current.innerHTML = updatedText;
+  //     setReplacedMap((prev) => ({ ...prev, [original]: true }));
+  //   }
+
+  //   // 상태 동기화
+  //   setContent(updatedText.replace(/<[^>]*>/g, "")); // 태그 제거된 텍스트
+  // };
+  const handleReplaceText = (original, corrected, index) => {
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const alreadyReplaced = replacedMap[index];
+    let updatedText = editor.innerHTML;
+
     if (alreadyReplaced) {
-      // 되돌리기
-      updatedText = content.replaceAll(corrected, original);
-      editorRef.current.innerHTML = updatedText;
-      setReplacedMap((prev) => ({ ...prev, [original]: false }));
+      // ✅ 되돌리기: 원래 텍스트 복원 + 색상 검정
+      updatedText = updatedText.replace(
+        new RegExp(`<span style="color:#1E90FF;">${corrected}</span>`, "g"),
+        `<span style="color:#616161; font-weight:400;">${original}</span>`
+      );
+      editor.innerHTML = updatedText;
+
+      // 색상 직접 변경
+      const spans = editor.querySelectorAll("span");
+      spans.forEach((span) => {
+        if (span.textContent === original) {
+          span.style.color = "#616161";
+        }
+      });
+
+      setReplacedMap((prev) => ({ ...prev, [index]: false }));
     } else {
-      // 교체하기
-      updatedText = content.replaceAll(
+      // ✅ 교체하기: 본문 단어를 파란색 교정 단어로 교체
+      updatedText = updatedText.replace(
         original,
         `<span style="color:#1E90FF;">${corrected}</span>`
       );
-      editorRef.current.innerHTML = updatedText;
-      setReplacedMap((prev) => ({ ...prev, [original]: true }));
+      editor.innerHTML = updatedText;
+
+      // 색상 직접 지정 (해당 글자만)
+      const spans = editor.querySelectorAll("span");
+      spans.forEach((span) => {
+        if (span.textContent === corrected) {
+          span.style.color = "#1E90FF";
+        }
+      });
+
+      setReplacedMap((prev) => ({ ...prev, [index]: true }));
     }
 
-    // 상태 동기화
-    setContent(updatedText.replace(/<[^>]*>/g, "")); // 태그 제거된 텍스트
+    // 본문 상태 동기화
+    setContent(editor.innerText);
   };
-  // 디버그용
-  // console.log("선택된 글감 확인:", selectedPrompt);
 
+  //
   // 색상 버튼 선택 시 체크 아이콘 핸들러
   const handleCoverSelect = (color) => {
     setSelectedCoverColor(color);
@@ -292,7 +337,12 @@ function WritingPage({ backgroundStyle }) {
                               isReplaced ? "undo" : ""
                             }`}
                             onClick={() =>
-                              handleReplaceText(item.original, item.corrected)
+                              // handleReplaceText(item.original, item.corrected)
+                              handleReplaceText(
+                                item.original,
+                                item.corrected,
+                                index
+                              )
                             }
                           >
                             {isReplaced ? (
