@@ -36,6 +36,8 @@ export default function LoginPage() {
       );
 
       const data = await res.json();
+      console.log("로그인 응답:", data);
+
       if (data.success) {
         localStorage.setItem("token", data.token);
         setUser(data.user); // ✅ 전역 Context에 user 저장

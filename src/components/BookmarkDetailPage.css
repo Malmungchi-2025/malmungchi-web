@@ -92,3 +92,28 @@
   font-weight: 500;
   line-height: 1.4;
 }
+
+/* 공통 스타일 */
+.icon {
+  font-size: 22px;
+}
+
+/* 좋아요 기본: 회색 */
+.like-icon {
+  color: #e0e0e0;
+}
+
+/* 좋아요 누름: 빨강 */
+.like-icon.liked {
+  color: #ff5a5a;
+}
+
+/* 스크랩 기본: 회색 */
+.scrap-icon {
+  color: #e0e0e0;
+}
+
+/* 스크랩 누름: 파랑 */
+.scrap-icon.scrapped {
+  color: #2569ed;
+}

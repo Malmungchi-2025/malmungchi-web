@@ -4,9 +4,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/FooterNew";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa6";
-import { FiBookmark } from "react-icons/fi";
+// import { FaRegHeart } from "react-icons/fa6";
+// import { FiBookmark } from "react-icons/fi";
 import { useLikeContext } from "../contexts/LikeContext";
+
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
+import { FiBookmark } from "react-icons/fi";
+import { BsBookmarkFill } from "react-icons/bs";
 
 export default function BookmarkDetailPage() {
   const { id } = useParams();
@@ -164,9 +168,12 @@ export default function BookmarkDetailPage() {
                   onClick={handleLike}
                   style={{ cursor: "pointer" }}
                 >
-                  <FaRegHeart
+                  {/* <FaRegHeart
                     className="icon"
                     style={{ color: liked ? "#ff5a5a" : "#999" }}
+                  /> */}
+                  <FaHeart
+                    className={`icon like-icon ${liked ? "liked" : ""}`}
                   />
                   <span>{post.likes ?? 0}</span>
                 </div>
@@ -175,9 +182,12 @@ export default function BookmarkDetailPage() {
                   onClick={handleScrap}
                   style={{ cursor: "pointer" }}
                 >
-                  <FiBookmark
+                  {/* <FiBookmark
                     className="icon"
                     style={{ color: scrapped ? "#1CD282" : "#999" }}
+                  /> */}
+                  <BsBookmarkFill
+                    className={`icon scrap-icon ${scrapped ? "scrapped" : ""}`}
                   />
                   <span>{post.scraps ?? 0}</span>
                 </div>

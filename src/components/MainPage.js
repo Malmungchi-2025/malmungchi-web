@@ -4,8 +4,10 @@ import Footer from "./FooterNew"; // 외부 컴포넌트
 import "./MainPage.css";
 import { TfiArrowCircleDown } from "react-icons/tfi";
 import { BsArrowUpCircle } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
+  const navigate = useNavigate();
   const sectionRefs = useRef([]);
   const [isScrolledDown, setIsScrolledDown] = useState(false);
 
@@ -15,19 +17,6 @@ function MainPage() {
   const scrollToSection = (index) => {
     sectionRefs.current[index].scrollIntoView({ behavior: "smooth" });
   };
-
-  // 일단 킾 _푸터까지 네비 인식 전 코드
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentSectionIndex = sectionRefs.current.findIndex((section) => {
-  //       return section.getBoundingClientRect().top >= -100;
-  //     });
-  //     setIsScrolledDown(currentSectionIndex > 0);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
 
   // 푸터영역까지 네비게이션 관리
   useEffect(() => {
@@ -131,7 +120,7 @@ function MainPage() {
                 <TfiArrowCircleDown />
               </button>
               <div className="section-indicator">
-                01<span>/03</span>
+                01<span>/04</span>
               </div>
             </section>
           ) : item.id === 3 ? (
@@ -176,7 +165,16 @@ function MainPage() {
                 <div className="main_text">
                   <h2>{item.title}</h2>
                   {item.description && <p>{item.description}</p>}
-                  {item.button && <button>{item.button}</button>}
+                  {item.button && (
+                    <button
+                      onClick={() => {
+                        if (item.id === 1) navigate("/copy-main");
+                        if (item.id === 2) navigate("/");
+                      }}
+                    >
+                      {item.button}
+                    </button>
+                  )}
                 </div>
                 <div className="image">
                   <img src={item.image} alt={`section-${item.id}`} />

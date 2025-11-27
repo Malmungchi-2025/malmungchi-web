@@ -30,6 +30,69 @@ export default function AllPostsPage() {
   //로딩 추가요
   const [loading, setLoading] = useState(true); // ✅ 로딩 상태 추가
 
+  // 검색 추가요
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState(null); // 검색 결과
+
+  // 검색 핸들러 추가
+  const handleSearch = async () => {
+    if (!searchKeyword.trim()) {
+      setFilteredPosts(null); // 전체 목록 표시
+      setCurrentPage(1);
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+
+      // 1. 글감 이름으로 prompt 목록 조회
+      const resPrompt = await fetch(
+        `${process.env.REACT_APP_SERVER_API_URL}/api/prompts?name=${searchKeyword}`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        }
+      );
+      const promptData = await resPrompt.json();
+      console.log("✅ prompt 조회 결과:", promptData);
+
+      // 2. 정확히 일치하는 글감만 추출
+      // const matchedPrompt = promptData.find(
+      //   (prompt) => prompt.word === searchKeyword
+      // );
+
+      const matchedPrompt = promptData.find((prompt) =>
+        prompt.word.includes(searchKeyword)
+      );
+
+      if (!matchedPrompt) {
+        console.error("❌ 일치하는 글감 없음");
+        setFilteredPosts([]);
+        return;
+      }
+
+      const promptId = matchedPrompt.id;
+      console.log("🎯 선택된 promptId:", promptId);
+
+      // 3. 해당 글감 ID로 글 목록 조회
+      const resPosts = await fetch(
+        `${process.env.REACT_APP_SERVER_API_URL}/api/writings?promptId=${promptId}`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        }
+      );
+
+      const data = await resPosts.json();
+      console.log("✅ 글 목록 조회 결과:", data);
+
+      setFilteredPosts(data);
+      setCurrentPage(1);
+      console.log("✅ 글 목록 조회 결과:", data);
+    } catch (err) {
+      console.error("검색 실패:", err);
+      setFilteredPosts([]);
+    }
+  };
+
   // ✅ 스크롤 시 네비 색상 변경
   useEffect(() => {
     const handleScroll = () => {
@@ -96,15 +159,24 @@ export default function AllPostsPage() {
     return updated ? { ...p, ...updated } : p;
   });
 
+  // const filteredPosts = mergedPosts.filter((post) =>
+  //   post.prompt_name?.toLowerCase().includes(searchKeyword.toLowerCase())
+  // );
+
   // ✅ 현재 페이지에 맞는 글 목록 계산
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const currentPosts = mergedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  // const currentPosts = mergedPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   // ✅ 전체 페이지 수 계산
   // const totalPages = Math.ceil(posts.length / postsPerPage);
-  const totalPages = Math.ceil(mergedPosts.length / postsPerPage);
+  // const totalPages = Math.ceil(mergedPosts.length / postsPerPage);
+
+  const displayPosts = filteredPosts ?? mergedPosts;
+
+  const totalPages = Math.ceil(displayPosts.length / postsPerPage);
+  const currentPosts = displayPosts.slice(indexOfFirstPost, indexOfLastPost);
 
   // ✅ 페이지 이동 함수
   const handlePageChange = (pageNumber) => {
@@ -278,12 +350,28 @@ export default function AllPostsPage() {
 
             {/* 검색창 */}
             <div className="allposts-search-bar">
-              <input
+              {/* <input
                 type="text"
                 placeholder="원하는 글을 검색해보세요!"
                 className="allposts-search-input"
+              /> */}
+              <input
+                type="text"
+                placeholder="원하는 글감을 검색해보세요!"
+                className="allposts-search-input"
+                value={searchKeyword}
+                // onChange={(e) => {
+                //   setSearchKeyword(e.target.value);
+                //   setCurrentPage(1); // 검색 시 페이지 초기화
+                // }}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
               />
-              <span className="allposts-search-icon">
+              <span onClick={handleSearch} className="allposts-search-icon">
                 <FiSearch />
               </span>
             </div>

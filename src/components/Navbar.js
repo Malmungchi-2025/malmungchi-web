@@ -1,42 +1,35 @@
-// 아이콘
 import { HiMiniUserCircle } from "react-icons/hi2";
-// css 파일
 import "../App.css";
 import "./Navbar.css";
 import LoginModal from "./LoginModal";
 
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react"; // ✅ useContext 추가
 import { useUser } from "../contexts/UserContext";
-// 필사하기 모달
+
 import TranscriptionModal from "./TranscriptionModal";
 import WritingModal from "../components/WritingModal";
 
 function Navbar({ bgColor, textColor, logoSrc }) {
-  // const { user, setUser } = useContext(UserContext);
   const { user, setUser } = useUser();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 필사 모달
-  const [showModal, setShowModal] = useState(false);
-  // 글쓰기 모달
-  const [showWritingModal, setShowWritingModal] = useState(false);
+  // ✅ 하나의 상태로 모달 관리
+  const [openModal, setOpenModal] = useState(null);
+  // null | "copy" | "write" | "login"
 
   const handleSelect = (type) => {
-    setShowModal(false);
+    setOpenModal(null);
     if (type === "main") {
-      navigate("/copy-main"); // 필사메인 페이지
+      navigate("/copy-main");
     } else if (type === "bookmark") {
-      navigate("/transcription-bookmark"); // 필사갈피 페이지
+      navigate("/transcription-bookmark");
     }
   };
 
   const handleWritingSelect = (option) => {
+    setOpenModal(null);
     if (option === "writing") navigate("/");
-    // 전체글 경로 정해지면 변경해주기
     if (option === "allpost") navigate("/allpost");
     if (option === "writingbookmark") navigate("/writing-bookmark");
   };
@@ -58,55 +51,61 @@ function Navbar({ bgColor, textColor, logoSrc }) {
           onClick={() => navigate("/main")}
           style={{ cursor: "pointer" }}
         />
+
         <div className="menu">
+          {/* 필사하기 */}
           <div style={{ position: "relative", display: "inline-block" }}>
             <button
-              onClick={() => setShowModal((prev) => !prev)}
+              onClick={() =>
+                setOpenModal((prev) => (prev === "copy" ? null : "copy"))
+              }
               className="nav-copy-btn"
               style={{ color: textColor }}
             >
               필사하기
             </button>
 
-            {/* 필사하기 모달 */}
-            {showModal && (
+            {openModal === "copy" && (
               <TranscriptionModal
-                onClose={() => setShowModal(false)}
+                onClose={() => setOpenModal(null)}
                 onSelect={handleSelect}
               />
             )}
           </div>
-          {/* <a href="/" style={{ color: textColor }}>
-            글쓰기
-          </a> */}
+
+          {/* 글쓰기 */}
           <div style={{ position: "relative", display: "inline-block" }}>
             <button
-              onClick={() => setShowWritingModal((prev) => !prev)}
+              onClick={() =>
+                setOpenModal((prev) => (prev === "write" ? null : "write"))
+              }
               className="nav-copy-btn"
               style={{ color: textColor }}
             >
               글쓰기
             </button>
 
-            {showWritingModal && (
+            {openModal === "write" && (
               <WritingModal
-                onClose={() => setShowWritingModal(false)}
+                onClose={() => setOpenModal(null)}
                 onSelect={handleWritingSelect}
               />
             )}
           </div>
 
-          {/* 👇 기존 Link 대신 onClick → 모달 열림 */}
+          {/* 로그인/계정 */}
           <div style={{ position: "relative" }}>
             <HiMiniUserCircle
               size={38}
               style={{ cursor: "pointer", color: textColor }}
-              onClick={() => setIsModalOpen((prev) => !prev)}
+              onClick={() =>
+                setOpenModal((prev) => (prev === "login" ? null : "login"))
+              }
             />
-            {/* 모달 */}
-            {isModalOpen && (
+
+            {openModal === "login" && (
               <LoginModal
-                onClose={() => setIsModalOpen(false)}
+                onClose={() => setOpenModal(null)}
                 user={user}
                 setUser={setUser}
               />

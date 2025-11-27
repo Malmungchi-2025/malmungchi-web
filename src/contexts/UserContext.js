@@ -10,15 +10,20 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (!token) return; // 토큰이 없으면 로그인 안 된 상태 유지
 
     const fetchUser = async () => {
+      console.log("ENV URL:", process.env.REACT_APP_SERVER_API_URL);
       try {
-        const res = await fetch("http://localhost:5000/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_SERVER_API_URL}/api/auth/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await res.json();
 

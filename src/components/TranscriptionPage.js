@@ -101,7 +101,7 @@ export default function TranscriptionPage() {
     //   next[pageIdx] = text;
     //   return next;
     // });
-    if (isComposing.current) return; // 조합 중엔 업데이트 안 함
+    // if (isComposing.current) return;
     const text = editorRef.current?.innerText ?? "";
     setTypedByPage((prev) => {
       const next = [...prev];
@@ -126,6 +126,18 @@ export default function TranscriptionPage() {
   const normalize = (s) => s.replace(/\r\n/g, "\n");
   const user = normalize(typed).slice(0, paragraph.length);
   const src = normalize(paragraph);
+
+  // 11.27.원분 때문에 그래
+  const ghostTextHTML = src
+    .split("")
+    .map((ch, i) => {
+      if (i < user.length) {
+        // 이미 작성한 글자 or 현재 입력 중인 글자 → 희미하게
+        return `<span style="opacity: 0.2;">${ch}</span>`;
+      }
+      return ch; // 아직 입력 안 한 부분은 회색 그대로
+    })
+    .join("");
 
   // 중간 이후 추가됨.
   // ✅ 한글 조합 중 여부 감지 + 커서 위치 복원
@@ -174,20 +186,26 @@ export default function TranscriptionPage() {
   //   .split("")
   //   .map((ch, i) => (user[i] === ch ? ch : " "))
   //   .join("");
-  const overlayText = src
+
+  const correctColor = dark ? "#fff" : "#000";
+  const wrongColor = "#ff3b30";
+  const currentInputColor = dark ? "#fff" : "#000";
+
+  const overlayText = user
     .split("")
     .map((ch, i) => {
-      // 조합 중에는 비교하지 않고 회색 유지
-      if (isComposing.current) {
-        return `<span style="color: #ccc; font-weight: 400;">${ch}</span>`;
+      if (i >= src.length) return "";
+
+      const isLast = i === user.length - 1;
+
+      if (isLast) {
+        return `<span style="color: ${currentInputColor};">${ch}</span>`;
       }
 
-      if (user[i] === ch) {
-        return `<span style="color: #000; font-weight: 400;">${ch}</span>`; // 일치 → 검은색
-      } else if (user[i]) {
-        return `<span style="color: #ff3b30; font-weight: 400;">${ch}</span>`; // 오타 → 빨강
+      if (ch === src[i]) {
+        return `<span style="color: ${correctColor};">${ch}</span>`; // ✅ 다크모드 대응됨
       } else {
-        return `<span style="color: #ccc; font-weight: 400;">${ch}</span>`; // 입력 전
+        return `<span style="color: ${wrongColor};">${ch}</span>`;
       }
     })
     .join("");
@@ -379,7 +397,11 @@ export default function TranscriptionPage() {
               {/* 필사 박스 */}
               <section className="copy-box" aria-label="필사 입력 영역">
                 {/* 회색 베이스(원문 전체) */}
-                <div className="ghost-text">{paragraph}</div>
+                {/* <div className="ghost-text">{paragraph}</div> */}
+                <div
+                  className="ghost-text"
+                  dangerouslySetInnerHTML={{ __html: ghostTextHTML }}
+                ></div>
 
                 {/* 검정 오버레이(쓴 부분만) */}
                 <div
