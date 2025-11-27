@@ -56,9 +56,9 @@
   transition: color 0.3s ease;
 }
 
-.icon:hover {
+/* .icon:hover {
   color: #ff4b4b;
-}
+} */
 
 .bookmarkdetail-body p {
   margin-bottom: 12px;
