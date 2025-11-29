@@ -4,17 +4,7 @@
   overflow-x: hidden;
 }
 
-/* 섹션 스타일 */
-/* .section {
-  height: 100vh;
-  padding: 120px 40px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #195fcf;
-  transition: background-color 0.3s;
-} */
-
+/* 세션 스타일 */
 .section1 {
   height: 100vh;
   padding-top: 100px; /* 네비바 공간 확보 */
@@ -25,10 +15,10 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-
   color: white;
 }
 
+/* section1 */
 /* 중앙 텍스트 */
 .hero-text h2 {
   white-space: pre-line;
@@ -42,8 +32,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 900px;
   z-index: 0;
+  height: 900px;
 }
 
 /* 오른쪽 뭉치 이미지 */
@@ -51,8 +41,8 @@
   position: absolute;
   top: 40px;
   right: 0px;
-  height: 900px;
   z-index: 0;
+  height: 900px;
 }
 
 /* section2 */
@@ -86,7 +76,7 @@
 /* section4 */
 .section4 {
   height: 100vh;
-  padding-top: 100px; /* 네비바 공간 확보 */
+  padding-top: 100px;
   box-sizing: border-box;
   background-color: #ffffff;
   color: #000;
@@ -100,7 +90,7 @@
 .image4 img {
   width: 300px;
   height: auto;
-  padding-right: 250px;
+  padding-right: 290px;
 }
 
 /* Section 4 전용 레이아웃 */
@@ -108,11 +98,11 @@
   flex-direction: row-reverse;
 }
 
-/* 버튼 스타일 */
+/* ↑ 버튼 스타일 */
 .scroll-up {
   position: absolute;
   bottom: 120px;
-  right: 200px;
+  right: 250px;
   font-size: 68px;
   background: none;
   border: none;
@@ -122,23 +112,24 @@
 
 .scroll-up.blue-arrow {
   color: #195fcf;
+  transition: color 0.2s;
+}
+
+.scroll-up.blue-arrow:hover {
+  color: #004cc7;
 }
 
 .main_content {
   min-height: calc(100vh - 100px);
-  /* max-width: 1200px; */
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: none;
   padding-left: 250px;
-  padding-right: 160px;
+  padding-right: 200px;
 }
 
-.main_text {
-  max-width: 50%;
-}
 .main_text h2 {
   font-size: 64px;
   font-weight: 700;
@@ -166,11 +157,11 @@
 }
 
 .main_text button:hover {
-  background-color: #144aad;
+  background-color: #004cc7;
 }
 
 .image img {
-  width: 860px;
+  width: 900px;
   height: auto;
 }
 
@@ -190,17 +181,27 @@
 /* 아래로 버튼 색상 분기 */
 .white-arrow {
   color: #fff;
+  transition: color 0.3s;
+}
+
+.scroll-down.white-arrow:hover {
+  color: #eeeeee; /* 예: 살짝 회색 빛으로 */
 }
 
 .blue-arrow {
   color: #195fcf;
+  transition: color 0.3s;
+}
+
+.scroll-down.blue-arrow:hover {
+  color: #004cc7; /* 기존 hover 색상 계열 */
 }
 
 /* 인디케이터 */
 .section-indicator {
   position: absolute;
   bottom: 60px;
-  right: 200px;
+  right: 250px;
   font-size: 32px;
   color: #f7f7f7;
   font-weight: 550;
@@ -225,4 +226,89 @@
 .section3,
 .section4 {
   position: relative;
+}
+
+/* 브레이크 포인트 추가.. */
+@media (max-width: 1440px) {
+  .main_content {
+    padding-left: 189px;
+    padding-right: 150px;
+  }
+
+  .hero-text h2,
+  .main_text h2 {
+    font-size: 48px;
+  }
+
+  .main_text p {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .main_text button {
+    font-size: 16px;
+    padding: 12px 38px;
+  }
+
+  .image img {
+    width: 675px;
+  }
+
+  .image4 img {
+    width: 225px;
+    padding-right: 200px;
+  }
+
+  .hero-left-img,
+  .hero-right-img {
+    height: 675px;
+  }
+
+  .scroll-up {
+    bottom: 100px;
+    right: 180px;
+    font-size: 48px;
+  }
+
+  .section-indicator {
+    bottom: 50px;
+    right: 184px;
+    font-size: 24px;
+  }
+
+  .scroll-down {
+    font-size: 30px;
+    bottom: 45px;
+  }
+}
+
+/* 애니메이션 */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.hero-left-img.animate {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.hero-right-img.animate {
+  animation: slideInRight 1s ease-out forwards;
 }

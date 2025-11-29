@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar"; // 외부 컴포넌트
 import Footer from "./FooterNew"; // 외부 컴포넌트
 import "./MainPage.css";
@@ -10,6 +10,17 @@ function MainPage() {
   const navigate = useNavigate();
   const sectionRefs = useRef([]);
   const [isScrolledDown, setIsScrolledDown] = useState(false);
+
+  // 애니메이션을 위함
+  const [startAnim, setStartAnim] = useState(false);
+
+  useEffect(() => {
+    // 페이지 진입 직후 0.3초 후에 애니메이션 시작
+    const timeout = setTimeout(() => {
+      setStartAnim(true);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, []);
 
   // 푸터까지 인식하기 위함
   const footerRef = useRef(null);
@@ -36,7 +47,7 @@ function MainPage() {
         }
       }
 
-      // ✅ Footer 영역에 들어오면 무조건 true로 설정
+      // Footer 영역에 들어오면 무조건 true로 설정
       if (footerRef.current) {
         const footerTop =
           footerRef.current.getBoundingClientRect().top + window.scrollY;
@@ -52,6 +63,7 @@ function MainPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 각 세션에 보여줄 문구 정리
   const sections = [
     {
       id: 0,
@@ -93,6 +105,7 @@ function MainPage() {
       />
       <div className="main-wrapper">
         {sections.map((item, i) =>
+          // 세션 1
           item.id === 0 ? (
             <section
               key={item.id}
@@ -103,16 +116,16 @@ function MainPage() {
                 <h2>{item.title}</h2>
               </div>
               <img
-                className="hero-left-img"
+                className={`hero-left-img ${startAnim ? "animate" : ""}`}
                 src="/images/main_marci1.png"
                 alt="캐릭터왼쪽"
               />
               <img
-                className="hero-right-img"
+                className={`hero-right-img ${startAnim ? "animate" : ""}`}
                 src="/images/main_mungci1.png"
                 alt="캐릭터오른쪽"
               />
-              {/* ✅ 아래로 스크롤 버튼 */}
+              {/* 아래로 스크롤 버튼 */}
               <button
                 className="scroll-down white-arrow"
                 onClick={() => scrollToSection(1)}
@@ -124,7 +137,7 @@ function MainPage() {
               </div>
             </section>
           ) : item.id === 3 ? (
-            // 🔸 Section 4 (Last, custom)
+            // 세션 4
             <section
               key={item.id}
               className={`${item.className} special-layout`}
@@ -155,7 +168,7 @@ function MainPage() {
               </div>
             </section>
           ) : (
-            // 🔄 Other Sections
+            // 세션 2,3
             <section
               key={item.id}
               className={item.className}
@@ -192,7 +205,7 @@ function MainPage() {
                 </button>
               )}
 
-              {/* ✅ 페이지 인디케이터 */}
+              {/* 페이지 인디케이터 */}
               <div
                 className={`section-indicator ${
                   i === 0 ? "white-indicator" : "blue-indicator"
