@@ -6,24 +6,6 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 
 export default function WritingBookmark() {
-  // 임시 데이터 (사용자가 작성한 글)
-  // const [scraps] = useState([
-  //   {
-  //     id: 101,
-  //     title: "별 헤는 밤",
-  //     date: "2025.09.20",
-  //     author: "윤동주",
-  //     color: "#F5F5F5",
-  //   },
-  //   {
-  //     id: 102,
-  //     title: "진달래꽃",
-  //     date: "2025.09.19",
-  //     author: "김소월",
-  //     color: "#FFF2B2",
-  //   },
-  // ]);
-
   const navigate = useNavigate();
   const [myWritings, setMyWritings] = useState([]);
   const [scraps, setScraps] = useState([]);

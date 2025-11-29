@@ -73,7 +73,9 @@
 }
 
 .bookmarkdetail-content {
-  width: 1420px;
+  /* width: 1420px;
+  height: 610px; */
+  width: 100%;
   height: 610px;
   box-sizing: border-box;
   background: #ffffff;
@@ -81,6 +83,9 @@
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
   text-align: left;
   overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: #616161 transparent;
 
   /* 글자 */
   padding-right: 60px;
@@ -103,6 +108,10 @@
   color: #e0e0e0;
 }
 
+.like-icon:hover {
+  color: #ff5a5a; /* 호버 시 빨간색 */
+}
+
 /* 좋아요 누름: 빨강 */
 .like-icon.liked {
   color: #ff5a5a;
@@ -111,6 +120,10 @@
 /* 스크랩 기본: 회색 */
 .scrap-icon {
   color: #e0e0e0;
+}
+
+.scrap-icon:hover {
+  color: #2569ed; /* 호버 시 초록색 */
 }
 
 /* 스크랩 누름: 파랑 */

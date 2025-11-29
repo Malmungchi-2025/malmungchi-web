@@ -84,6 +84,10 @@
     opacity: 1;
   }
 }
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards; /* 여기서 1s으로 맞춰야 위랑 자연스럽게 연결됨 */
+}
 
 @keyframes fadeOut {
   from {

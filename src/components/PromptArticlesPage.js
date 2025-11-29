@@ -4,38 +4,18 @@ import Navbar from "./Navbar";
 import Footer from "./FooterNew";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { IoIosArrowDropright } from "react-icons/io";
 
 function PromptArticlesPage({ backgroundStyle }) {
   const location = useLocation();
   const promptId = location.state?.promptId;
+  const navigate = useNavigate();
 
-  console.log("넘어온 promptId:", promptId);
   const [articles, setArticles] = useState([]);
 
-  // ✅ 임시 데이터
-  // const articles = [
-  //   {
-  //     id: 1,
-  //     title: "편달(鞭撻)",
-  //     content:
-  //       "그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다그게 너를 위한 길이니? 어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다어머니의 목소리는 항상 단호했다나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "편달(鞭撻)",
-  //     content: "나는 종종 어머니의 말씀이 부드럽고도 날카롭게 느껴졌다...",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "편달(鞭撻)",
-  //     content: "그 순간 나는 내 안의 모든 불안이 고요해짐을 느꼈다...",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "편달(鞭撻)",
-  //     content: "랄랄 순간 나는 내 안의 모든 불안이 고요해짐을 느꼈다...",
-  //   },
-  // ];
+  // 호버시 처리
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -45,7 +25,9 @@ function PromptArticlesPage({ backgroundStyle }) {
         );
         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
         const data = await res.json();
-        setArticles(data);
+        console.log("✅ 받아온 전체 data:", data);
+        // setArticles(data);
+        setArticles(data.slice(0, 10));
       } catch (err) {
         console.error("데이터 불러오기 실패:", err);
       }
@@ -57,34 +39,68 @@ function PromptArticlesPage({ backgroundStyle }) {
   return (
     <div>
       <Navbar
-        bgColor="#000000"
-        textColor="#ffffff"
+        bgColor="rgba(0, 0, 0, 0.8)"
+        textColor="#E0E0E0"
         logoSrc="/images/logo_w.png"
       />
       <div className="container" style={backgroundStyle}>
         <div className="main-back">
           <div className="article-wrapper">
             <h2>‘글감’에 대한 유저들의 글</h2>
-            <div className="card-slider">
+            <div className="promptcard-slider">
               {articles.map((item) => (
-                <div className="card" key={item.id}>
-                  <div className="header">
-                    <div className="card-header">사용자 설정 별명</div>
-                    <div className="card-created">2025.06.09</div>
+                <div className="promptcard" key={item.id}>
+                  <div className="promptcard-header">
+                    <div className="promptcard-header-text">
+                      {item.author || "사용자"}
+                    </div>
+                    <div className="promptcard-created">
+                      {new Date(item.created_at).toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                      })}
+                    </div>
                   </div>
                   <div
-                    className="content"
+                    className="promptcard-content"
                     style={{
                       backgroundImage: `url(${
                         process.env.PUBLIC_URL + "/images/quote.png"
                       })`,
                     }}
                   >
-                    <div className="card-title">{item.title}</div>
-                    <div className="card-content">“{item.content}”</div>
+                    <div className="promptcard-content-title">{item.title}</div>
+                    <div className="promptcard-content-content">
+                      “{item.content}”
+                    </div>
                   </div>
                 </div>
               ))}
+              {articles.length === 10 && (
+                <div className="see-all-button">
+                  <span className="see-all-button-text">전체보기</span>
+                  <button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      padding: 0,
+                      marginLeft: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => navigate("/allpost")}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
+                    <IoIosArrowDropright
+                      size={44}
+                      color={isHovered ? "#EEEEEE" : "#fff"}
+                    />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

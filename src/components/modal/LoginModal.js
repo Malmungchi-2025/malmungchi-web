@@ -187,7 +187,6 @@ function LoginModal({ onClose }) {
                       const data = await res.json();
 
                       if (data.success) {
-                        // ✅ 로컬 상태만 빠르게 반영
                         setUser((prev) => ({
                           ...prev,
                           profile_image: selectedImage,

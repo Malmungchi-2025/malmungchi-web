@@ -59,6 +59,9 @@ function WritingPage({ backgroundStyle }) {
   // 설명보기 버튼을 위함
   const [expandedIndices, setExpandedIndices] = useState([]);
 
+  // 글자 수 제한을 위함
+  const [isOverLimit, setIsOverLimit] = useState(false);
+
   // 함수 작성
   //
   //
@@ -70,12 +73,35 @@ function WritingPage({ backgroundStyle }) {
   //
   // 글이 작성될 때마다 추적하여 진행되는 함수
   // 작성한 text를 상태에 저장 및 글자 수 제한 기능
+  // const handleContentChange = (e) => {
+  //   const text = e.target.innerText || "";
+  //   if (text.length <= charLimit) {
+  //     setContent(text);
+  //   }
+  // };
   const handleContentChange = (e) => {
     const text = e.target.innerText || "";
+
     if (text.length <= charLimit) {
       setContent(text);
+    } else {
+      // ✅ 초과 입력 시 자동으로 자름
+      const truncated = text.slice(0, charLimit);
+      setContent(truncated);
+
+      // ✅ 실제 DOM 내용도 잘라서 반영
+      e.target.innerText = truncated;
+
+      // ✅ 커서 맨 끝으로 이동
+      const range = document.createRange();
+      const sel = window.getSelection();
+      range.selectNodeContents(e.target);
+      range.collapse(false);
+      sel.removeAllRanges();
+      sel.addRange(range);
     }
   };
+
   //
   // 맞춤법 검사 함수
   const handleGrammarCheck = async () => {
@@ -132,29 +158,6 @@ function WritingPage({ backgroundStyle }) {
   };
 
   // 교체하기 버튼을 누르면 실행되는 함수
-  // 다시 공부 및 정리하기
-  // const handleReplaceText = (original, corrected) => {
-  //   const alreadyReplaced = replacedMap[original];
-
-  //   let updatedText;
-  //   if (alreadyReplaced) {
-  //     // 되돌리기
-  //     updatedText = content.replaceAll(corrected, original);
-  //     editorRef.current.innerHTML = updatedText;
-  //     setReplacedMap((prev) => ({ ...prev, [original]: false }));
-  //   } else {
-  //     // 교체하기
-  //     updatedText = content.replaceAll(
-  //       original,
-  //       `<span style="color:#1E90FF;">${corrected}</span>`
-  //     );
-  //     editorRef.current.innerHTML = updatedText;
-  //     setReplacedMap((prev) => ({ ...prev, [original]: true }));
-  //   }
-
-  //   // 상태 동기화
-  //   setContent(updatedText.replace(/<[^>]*>/g, "")); // 태그 제거된 텍스트
-  // };
   const handleReplaceText = (original, corrected, index) => {
     const editor = editorRef.current;
     if (!editor) return;
@@ -337,7 +340,6 @@ function WritingPage({ backgroundStyle }) {
                               isReplaced ? "undo" : ""
                             }`}
                             onClick={() =>
-                              // handleReplaceText(item.original, item.corrected)
                               handleReplaceText(
                                 item.original,
                                 item.corrected,

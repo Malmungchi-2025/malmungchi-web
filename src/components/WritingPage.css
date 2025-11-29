@@ -39,6 +39,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.icon-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .action-buttons {
@@ -57,11 +62,15 @@
   font-size: 22px;
   cursor: pointer;
   margin-left: 20px;
+  transition: background-color 0.3s;
 }
 .action-btn1.loading {
   background-color: #c9cad4; /* 로딩 시 배경색 */
   color: #ffffff; /* 로딩 시 글자색 */
   cursor: not-allowed;
+}
+.action-btn1:hover {
+  background-color: rgba(238, 238, 238, 1);
 }
 
 .action-btn2 {
@@ -75,6 +84,11 @@
   font-size: 22px;
   cursor: pointer;
   margin-left: 20px;
+  transition: background-color 0.3s;
+}
+
+.action-btn2:hover {
+  background-color: rgba(54, 54, 54, 1);
 }
 
 /* 입력 부분 */
@@ -105,7 +119,8 @@
 
 /* 내용 입력 부분 */
 .content-input {
-  height: 460px;
+  /* height: 460px; */
+  height: 48vh;
   padding: 60px;
   font-family: "Pretendard", "Noto Sans KR";
   font-size: 26px;
@@ -113,11 +128,26 @@
   border: none;
   border-radius: 10px;
   background-color: rgba(217, 217, 217, 1);
+  overflow-y: auto;
 }
 
 .content-input::placeholder {
   color: rgb(97, 97, 97);
   opacity: 0.7;
+}
+
+/* 스크롤 부분 수정 */
+.content-input::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+
+.content-input::-webkit-scrollbar-thumb {
+  background-color: #616161; /* 스크롤바 색상 */
+  border-radius: 4px;
+}
+
+.content-input::-webkit-scrollbar-track {
+  background-color: transparent; /* 트랙(배경) 색상 */
 }
 
 .content-input:focus {

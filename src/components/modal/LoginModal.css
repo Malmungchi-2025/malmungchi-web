@@ -8,7 +8,7 @@ button {
 .login-modal-overlay {
   position: absolute;
   top: 72px; /* 아이콘 아래 간격 */
-  right: -50px; /* 우측 끝에 붙이기 */
+  right: -34px; /* 우측 끝에 붙이기 */
   background: transparent; /* 불필요한 배경 제거 */
   width: auto;
   height: auto;
@@ -32,7 +32,7 @@ button {
   content: "";
   position: absolute;
   top: -5px;
-  right: 48px;
+  right: 32px;
   width: 43px;
   height: 43px;
   background: white;
@@ -110,7 +110,6 @@ button {
   cursor: pointer;
   border: none;
   background-color: #eff4fb;
-  transition: background-color 0.3s ease;
 }
 
 .mypage-modal-username {
@@ -164,6 +163,11 @@ button {
 
   background: #f7f7f7;
   color: #616161;
+  transition: background-color 0.3s ease;
+}
+
+.mypage-modal-logout-btn:hover {
+  background: #eeeeee;
 }
 
 /* 프로필 변경 모달 영역 */
@@ -182,7 +186,7 @@ button {
   padding: 24px;
   border-radius: 12px;
   width: 40%;
-  height: 43%;
+  height: 40%;
   text-align: center;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.16);
 }
