@@ -17,7 +17,7 @@ export function UserProvider({ children }) {
       console.log("ENV URL:", process.env.REACT_APP_SERVER_API_URL);
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_SERVER_API_URL}/api/auth/me`,
+          `${process.env.REACT_APP_SERVER_API_URL}/api/web-auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
