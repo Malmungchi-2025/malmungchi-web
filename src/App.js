@@ -10,7 +10,7 @@ import DirectAddPage from "./components/DirectAddPage";
 import TranscriptionCompletePage from "./components/TranscriptionCompletePage";
 import MainPage from "./components/MainPage";
 // import LoginPage from "./components/LoginPage";
-import NewLoginPage from "./components/NewLoginPage";
+import NewLoginPage from "./components/loginPage/NewLoginPage";
 import TranscriptionBookmark from "./components/TranscriptionBookmark";
 import TranscriptionDetail from "./components/TranscriptionDetail";
 import { UserProvider } from "./contexts/UserContext";

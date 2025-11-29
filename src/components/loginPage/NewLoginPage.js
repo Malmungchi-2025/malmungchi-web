@@ -2,8 +2,8 @@
 import { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./NewLoginPage.css";
-import { UserContext } from "../contexts/UserContext";
-import Footer from "./FooterNew";
+import { UserContext } from "../../contexts/UserContext";
+import Footer from "../FooterNew";
 
 export default function NewLoginPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ export default function NewLoginPage() {
 
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER_API_URL}/api/auth/login/web`,
+        `${process.env.REACT_APP_SERVER_API_URL}/api/web-auth/login/web`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -44,7 +44,7 @@ export default function NewLoginPage() {
   };
 
   const handleKakaoLogin = () => {
-    window.location.href = `${process.env.REACT_APP_SERVER_API_URL}/api/auth/kakao/web`;
+    window.location.href = `${process.env.REACT_APP_SERVER_API_URL}/api/web-auth/kakao/web`;
   };
 
   return (
@@ -56,6 +56,7 @@ export default function NewLoginPage() {
           src="/images/login_logo.png"
           className="new-login-logo"
           alt="logo"
+          onClick={() => navigate("/main")}
         />
 
         <div className="new-login-wrapper">

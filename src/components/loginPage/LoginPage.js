@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-import { UserContext } from "../contexts/UserContext"; // ✅ 경로 주의 (App.js와 동일)
-import Footer from "./FooterNew";
+import { UserContext } from "../../contexts/UserContext"; // ✅ 경로 주의 (App.js와 동일)
+import Footer from "../FooterNew";
 import { LuInfo } from "react-icons/lu";
-import CustomCheckbox from "../components/CustomCheckbox";
+import CustomCheckbox from "../CustomCheckbox";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_SERVER_API_URL}/api/auth/login/web`,
+        `${process.env.REACT_APP_SERVER_API_URL}/api/login/web`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
