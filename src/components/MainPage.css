@@ -229,7 +229,7 @@
 }
 
 /* 브레이크 포인트 추가.. */
-@media (max-width: 1440px) {
+/* @media (max-width: 1440px) {
   .main_content {
     padding-left: 189px;
     padding-right: 150px;
@@ -280,7 +280,7 @@
     font-size: 30px;
     bottom: 45px;
   }
-}
+} */
 
 /* 애니메이션 */
 @keyframes slideInLeft {

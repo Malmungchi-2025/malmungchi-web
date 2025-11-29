@@ -17,6 +17,7 @@ import WritingBookmark from "./components/WritingBookmark";
 import BookmarkDetailPage from "./components/BookmarkDetailPage";
 import AllPostsPage from "./components/AllPostsPage";
 import { LikeProvider } from "./contexts/LikeContext";
+import ResolutionGuard from "./components/ResolutionGuard";
 
 // 리액트 훅
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -55,59 +56,66 @@ function App() {
   }, []);
 
   return (
-    <LikeProvider>
-      <UserProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={<LandingPage backgroundStyle={backgroundStyle} />}
-            />
-            <Route
-              path="/prompt"
-              element={<PromptPage backgroundStyle={backgroundStyle} />}
-            />
-            <Route
-              path="/write"
-              element={<WritingPage backgroundStyle={backgroundStyle} />}
-            />
-            <Route
-              path="/complete"
-              element={<CompletePage backgroundStyle={backgroundStyle} />}
-            />
-            <Route
-              path="/prompt-articles"
-              element={<PromptArticlesPage backgroundStyle={backgroundStyle} />}
-            />
-            <Route path="/main" element={<MainPage />} />
-            <Route path="/copy-main" element={<CopyMainPage />} />
-            {/* <Route path="/copy/start/:id" element={<TranscriptionPage />} />{" "} */}
-            <Route path="/copy/start/:id" element={<TranscriptionPage />} />
-            <Route path="/copy/start/custom" element={<TranscriptionPage />} />
-            <Route path="/directadd" element={<DirectAddPage />} />
-            <Route
-              path="/transcription-complete"
-              element={<TranscriptionCompletePage />}
-            />
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/transcription-bookmark"
-              element={<TranscriptionBookmark />}
-            />
-            <Route
-              path="/transcription-detail/:id"
-              element={<TranscriptionDetail />}
-            />
-            <Route path="/writing-bookmark" element={<WritingBookmark />} />
-            <Route
-              path="/writingbookmark/:id"
-              element={<BookmarkDetailPage />}
-            />
-            <Route path="/allpost" element={<AllPostsPage />} />
-          </Routes>
-        </BrowserRouter>
-      </UserProvider>
-    </LikeProvider>
+    <ResolutionGuard>
+      <LikeProvider>
+        <UserProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={<LandingPage backgroundStyle={backgroundStyle} />}
+              />
+              <Route
+                path="/prompt"
+                element={<PromptPage backgroundStyle={backgroundStyle} />}
+              />
+              <Route
+                path="/write"
+                element={<WritingPage backgroundStyle={backgroundStyle} />}
+              />
+              <Route
+                path="/complete"
+                element={<CompletePage backgroundStyle={backgroundStyle} />}
+              />
+              <Route
+                path="/prompt-articles"
+                element={
+                  <PromptArticlesPage backgroundStyle={backgroundStyle} />
+                }
+              />
+              <Route path="/main" element={<MainPage />} />
+              <Route path="/copy-main" element={<CopyMainPage />} />
+              {/* <Route path="/copy/start/:id" element={<TranscriptionPage />} />{" "} */}
+              <Route path="/copy/start/:id" element={<TranscriptionPage />} />
+              <Route
+                path="/copy/start/custom"
+                element={<TranscriptionPage />}
+              />
+              <Route path="/directadd" element={<DirectAddPage />} />
+              <Route
+                path="/transcription-complete"
+                element={<TranscriptionCompletePage />}
+              />
+              <Route path="/login" element={<LoginPage />} />
+              <Route
+                path="/transcription-bookmark"
+                element={<TranscriptionBookmark />}
+              />
+              <Route
+                path="/transcription-detail/:id"
+                element={<TranscriptionDetail />}
+              />
+              <Route path="/writing-bookmark" element={<WritingBookmark />} />
+              <Route
+                path="/writingbookmark/:id"
+                element={<BookmarkDetailPage />}
+              />
+              <Route path="/allpost" element={<AllPostsPage />} />
+            </Routes>
+          </BrowserRouter>
+        </UserProvider>
+      </LikeProvider>
+    </ResolutionGuard>
   );
 }
 
