@@ -1,0 +1,183 @@
+/* 전체 컨테이너 */
+.new-login-container {
+  width: 100%;
+  min-height: 100vh; /* 🔥 footer 하단 고정 핵심 */
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 내부 콘텐츠 (footer를 아래로 밀어내는 flex:1) */
+.new-login-content {
+  flex: 1; /* 🔥 화면의 남는 높이를 모두 차지 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 로고 */
+.new-login-logo {
+  margin-top: 80px;
+  margin-bottom: 60px;
+  width: 150px;
+}
+
+/* 전체 박스 레이아웃 */
+.new-login-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* 2개 컬럼 */
+.new-login-left,
+.new-login-right {
+  width: 50%;
+}
+
+/* 제목 */
+.new-login-title {
+  font-size: 32px;
+  font-weight: 550;
+  color: #262626;
+  margin-bottom: 28px;
+}
+
+/* 이메일 로그인 input */
+.new-login-input-email {
+  width: 440px;
+  height: 32px;
+  margin-bottom: 0px;
+  padding: 16px 20px;
+  border: 1px solid #c9cad4;
+  border-radius: 10px 10px 0 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #262626;
+}
+.new-login-input-email::placeholder {
+  color: #989898;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.new-login-input-email:focus {
+  outline: none;
+}
+
+.new-login-input-password {
+  width: 440px;
+  height: 32px;
+  padding: 16px 20px;
+  border: 1px solid #c9cad4;
+  border-top: 1px solid transparent;
+  border-radius: 0px 0px 10px 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #262626;
+}
+.new-login-input-password::placeholder {
+  color: #989898;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.new-login-input-password:focus {
+  outline: none;
+}
+
+/* 에러 영역 고정 높이 */
+.new-login-error-fixed {
+  padding-top: 12px;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+/* 실제 에러 텍스트 */
+.new-login-error {
+  font-size: 16px;
+  color: #ff2f2f;
+}
+
+/* 로그인 버튼 */
+.new-login-submit {
+  width: 480px;
+  height: 60px;
+  background: #1a73e8;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-login-submit:hover {
+  background: #004cc7;
+}
+
+/* 이메일 회원 가입 안내 */
+.new-login-helper {
+  font-size: 16px;
+  margin-top: 24px;
+}
+
+.new-login-helper-text1 {
+  color: #989898;
+  margin-bottom: 8px;
+}
+
+.new-login-helper-text2 {
+  color: #616161;
+  font-weight: 500;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+/* 가운데 구분선 */
+.new-login-divider {
+  width: 1px;
+  background: #e0e0e0;
+  height: 320px;
+  margin: 0 40px;
+  flex-shrink: 0;
+  margin-top: 30px;
+}
+
+/* SNS 로그인 설명 */
+.new-login-desc {
+  font-size: 20px;
+  color: #616161;
+  margin-bottom: 35px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 132px;
+}
+
+/* 카카오 버튼 */
+.new-login-kakao {
+  width: 480px;
+  height: 60px;
+  background: #fae100;
+  border: none;
+  border-radius: 10px;
+  color: #3b1d1e;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.new-login-kakao img {
+  width: 28px;
+  height: 28px;
+}

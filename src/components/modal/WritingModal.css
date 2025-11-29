@@ -44,6 +44,7 @@
   cursor: pointer;
   color: #262626;
   padding-top: 12px;
+  transition: color 0.3s ease;
 }
 
 .writing-modal-btn-02 {
@@ -55,6 +56,7 @@
   cursor: pointer;
   color: #262626;
   padding-top: 4px;
+  transition: color 0.3s ease;
 }
 
 .writing-modal-btn-03 {
@@ -66,6 +68,7 @@
   cursor: pointer;
   color: #262626;
   padding-top: 4px;
+  transition: color 0.3s ease;
 }
 
 /* 밑줄 */
@@ -74,4 +77,11 @@
   height: 1px; /* 두께 */
   border: none; /* 기본 선 제거 */
   background: #fafafa; /* 원하는 색상 */
+}
+
+/* 버튼 호버 효과 */
+.writing-modal-btn-01:hover,
+.writing-modal-btn-02:hover,
+.writing-modal-btn-03:hover {
+  color: #195fcf;
 }

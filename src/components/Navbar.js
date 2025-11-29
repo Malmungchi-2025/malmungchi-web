@@ -1,14 +1,14 @@
 import { HiMiniUserCircle } from "react-icons/hi2";
 import "../App.css";
 import "./Navbar.css";
-import LoginModal from "./LoginModal";
+import LoginModal from "./modal/LoginModal";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
-import TranscriptionModal from "./TranscriptionModal";
-import WritingModal from "../components/WritingModal";
+import TranscriptionModal from "../components/modal/TranscriptionModal";
+import WritingModal from "../components/modal/WritingModal";
 
 function Navbar({ bgColor, textColor, logoSrc }) {
   const { user, setUser } = useUser();

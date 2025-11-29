@@ -9,7 +9,8 @@ import TranscriptionPage from "./components/TranscriptionPage";
 import DirectAddPage from "./components/DirectAddPage";
 import TranscriptionCompletePage from "./components/TranscriptionCompletePage";
 import MainPage from "./components/MainPage";
-import LoginPage from "./components/LoginPage";
+// import LoginPage from "./components/LoginPage";
+import NewLoginPage from "./components/NewLoginPage";
 import TranscriptionBookmark from "./components/TranscriptionBookmark";
 import TranscriptionDetail from "./components/TranscriptionDetail";
 import { UserProvider } from "./contexts/UserContext";
@@ -96,7 +97,7 @@ function App() {
                 path="/transcription-complete"
                 element={<TranscriptionCompletePage />}
               />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/login" element={<NewLoginPage />} />
               <Route
                 path="/transcription-bookmark"
                 element={<TranscriptionBookmark />}

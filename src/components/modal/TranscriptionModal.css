@@ -10,7 +10,7 @@
 }
 
 .transcription-modal-box {
-  background: #eff4fb;
+  background: #fff;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@
   right: 48px;
   width: 43px;
   height: 43px;
-  background: #eff4fb;
+  background: #fff;
   transform: rotate(45deg);
   border-radius: 4px; /* 뭉툭하게 */
   z-index: -1;
@@ -42,8 +42,9 @@
   padding-top: 8px;
   width: 100%;
   cursor: pointer;
-  color: #616161;
+  color: #262626;
   padding-top: 12px;
+  transition: color 0.3s ease;
 }
 
 .transcription-modal-btn-02 {
@@ -53,8 +54,9 @@
   padding-top: 8px;
   width: 100%;
   cursor: pointer;
-  color: #616161;
+  color: #262626;
   padding-top: 4px;
+  transition: color 0.3s ease;
 }
 
 /* 밑줄 */
@@ -62,5 +64,11 @@
   width: 100%; /* 모달 너비에 맞춤 */
   height: 1px; /* 두께 */
   border: none; /* 기본 선 제거 */
-  background: #ffffff; /* 원하는 색상 */
+  background: #fafafa; /* 원하는 색상 */
+}
+
+/* 버튼 호버 효과 */
+.transcription-modal-btn-01:hover,
+.transcription-modal-btn-02:hover {
+  color: #195fcf;
 }

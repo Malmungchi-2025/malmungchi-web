@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import "./LoginModal.css";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../../contexts/UserContext";
 
 function LoginModal({ onClose }) {
   const navigate = useNavigate();

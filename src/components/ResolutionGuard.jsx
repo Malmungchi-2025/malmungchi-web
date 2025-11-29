@@ -26,7 +26,7 @@ const ResolutionGuard = ({ children }) => {
   if (status === "checking") return null;
   if (status === "ok_100") return children;
 
-  // ✅ 안내 메시지 분기
+  // 안내 메시지 분기
   let message = "";
   switch (status) {
     case "zoom_80":

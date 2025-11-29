@@ -228,60 +228,6 @@
   position: relative;
 }
 
-/* 브레이크 포인트 추가.. */
-/* @media (max-width: 1440px) {
-  .main_content {
-    padding-left: 189px;
-    padding-right: 150px;
-  }
-
-  .hero-text h2,
-  .main_text h2 {
-    font-size: 48px;
-  }
-
-  .main_text p {
-    font-size: 14px;
-    margin-bottom: 40px;
-  }
-
-  .main_text button {
-    font-size: 16px;
-    padding: 12px 38px;
-  }
-
-  .image img {
-    width: 675px;
-  }
-
-  .image4 img {
-    width: 225px;
-    padding-right: 200px;
-  }
-
-  .hero-left-img,
-  .hero-right-img {
-    height: 675px;
-  }
-
-  .scroll-up {
-    bottom: 100px;
-    right: 180px;
-    font-size: 48px;
-  }
-
-  .section-indicator {
-    bottom: 50px;
-    right: 184px;
-    font-size: 24px;
-  }
-
-  .scroll-down {
-    font-size: 30px;
-    bottom: 45px;
-  }
-} */
-
 /* 애니메이션 */
 @keyframes slideInLeft {
   from {

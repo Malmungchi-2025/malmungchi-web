@@ -67,6 +67,11 @@ button {
   font-size: 20px;
   background: #195fcf;
   color: white;
+  transition: background-color 0.3s ease;
+}
+
+.login-modal-login-button:hover {
+  background: #004cc7;
 }
 
 /* 마이페이지 모달 부분 */
