@@ -15,40 +15,9 @@ function CompletePage({ backgroundStyle }) {
 
   // 이동
   const navigate = useNavigate();
-  // 전달된 글
-  // const writing = location.state;
 
-  // const [isPosted, setIsPosted] = useState(null); // true or false
-  const [saved, setSaved] = useState(false); // 저장 완료 여부
-
-  // const handleSave = async (publishStatus) => {
-  //   if (saved) return; // 중복 저장 방지
-
-  //   try {
-  //     const res = await fetch("http://localhost:5000/api/writings", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         title,
-  //         content,
-  //         promptId,
-  //         isPublished: publishStatus,
-  //       }),
-  //     });
-
-  //     const result = await res.json();
-
-  //     if (result.success) {
-  //       // setIsPosted(publishStatus);
-  //       setSaved(true);
-  //     } else {
-  //       alert("저장 실패");
-  //     }
-  //   } catch (error) {
-  //     console.error("저장 오류:", error);
-  //     alert("서버 오류");
-  //   }
-  // };
+  // 저장 완료 여부
+  const [saved, setSaved] = useState(false);
 
   // ✅ 게시 여부를 true로만 저장하고 3초 뒤 이동
   const handlePost = async () => {
@@ -92,27 +61,42 @@ function CompletePage({ backgroundStyle }) {
     }
   };
 
-  // ✅ 게시하지 않고 바로 이동
-  // const handlePrivate = async () => {
-  //   try {
-  //     await fetch("http://localhost:5000/api/writings", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         title,
-  //         content,
-  //         promptId,
-  //         isPublished: false, // ❌ 비공개
-  //       }),
-  //     });
-
-  //     navigate("/prompt-articles", { state: { promptId } }); // 바로 이동
-  //   } catch (err) {
-  //     console.error("비공개 저장 실패:", err);
-  //   }
-  // };
+  // 전체 게시는 하지 않되, 내가 쓴 글에서 확인 가능
   const handlePrivate = async () => {
-    navigate("/prompt-articles", { state: { promptId } });
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_API_URL}/api/writings`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title,
+            content,
+            promptId,
+            isPublished: false, // ✅ 비공개 저장
+            customColor: color,
+          }),
+        }
+      );
+
+      const result = await res.json();
+      if (result.success) {
+        navigate("/prompt-articles", { state: { promptId } });
+      }
+    } catch (err) {
+      console.error("비공개 저장 실패:", err);
+    }
   };
 
   useEffect(() => {
@@ -128,8 +112,8 @@ function CompletePage({ backgroundStyle }) {
   return (
     <div>
       <Navbar
-        bgColor="#000000"
-        textColor="#ffffff"
+        bgColor="rgba(0, 0, 0, 0.8)"
+        textColor="#E0E0E0"
         logoSrc="/images/logo_w.png"
       />
       <div className="container" style={backgroundStyle}>

@@ -8,8 +8,9 @@ import "./LandingPage.css";
 function LandingPage({ backgroundStyle }) {
   const navigate = useNavigate();
   // 네비게이션 바 색상 전달
-  const navBg = "rgba(0, 0, 0, 0.8)";
-  const textColor = "#E0E0E0";
+  const navBg =
+    "linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(255,255,255,0))";
+  const textColor = "#FFFFFF";
   const logoSrc = "/images/logo_w.png";
 
   const handleMainContentClick = () => {
