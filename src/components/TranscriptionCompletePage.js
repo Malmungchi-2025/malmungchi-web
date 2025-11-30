@@ -23,7 +23,8 @@ function TranscriptionCompletePage() {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("로그인이 필요합니다.");
+        alert("로그인이 필요한 서비스입니다");
+        navigate("/login");
         return;
       }
 
@@ -61,6 +62,16 @@ function TranscriptionCompletePage() {
     }
   };
 
+  // 저장 안하는 함수
+  const handleCancelSave = () => {
+    const confirmed = window.confirm(
+      "작성한 내용과 포인트가 저장되지 않습니다.\n저장하지 않겠습니까?"
+    );
+    if (confirmed) {
+      navigate("/copy-main");
+    }
+  };
+
   return (
     <div>
       <Navbar
@@ -88,21 +99,14 @@ function TranscriptionCompletePage() {
             </p>
             <div className="TCP-button-group">
               <button
-                className="TCP-btn-cancel"
-                style={{
-                  background: dark ? "#DADADA" : "#FAFAFA",
-                  color: dark ? "#363636" : "#262626",
-                }}
+                className={`TCP-btn-cancel ${dark ? "dark" : "light"}`}
+                onClick={handleCancelSave}
               >
                 저장하지 않기
               </button>
               <button
-                className="TCP-btn-save"
+                className={`TCP-btn-save ${dark ? "dark" : "light"}`}
                 onClick={handleSave}
-                style={{
-                  background: dark ? "#F7F7F7" : "#195FCF",
-                  color: dark ? "#363636:" : "#FFFFFF",
-                }}
               >
                 작품 저장하기
               </button>

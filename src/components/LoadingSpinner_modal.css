@@ -1,0 +1,24 @@
+.spinner-modal-container {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+/* 회전 스피너 자체 */
+.spinner-modal {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #195fcf;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/FooterNew";
 import "./CopyMainPage.css";
 import "../App.css";
+import LoadingSpinner_modal from "../components/LoadingSpinner_modal";
 
 function CopyMainPage() {
   const navigate = useNavigate();
@@ -13,19 +14,29 @@ function CopyMainPage() {
 
   // 데이터 불러온당께
   const [recommendData, setRecommendData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 추천 데이터 불러오기
   const fetchRecommend = async () => {
     try {
-      setIsModalOpen(true); // 모달 먼저 열기
-      setRecommendData(null); // 이전 데이터 초기화
+      setIsLoading(true);
+      setIsModalOpen(true);
 
-      const res = await fetch(
-        `${process.env.REACT_APP_SERVER_API_URL}/api/copy-items/recommend`
-      );
-      if (!res.ok) throw new Error("서버 응답 실패");
+      let data = null;
+      let tryCount = 0;
 
-      const data = await res.json();
+      do {
+        const res = await fetch(
+          `${process.env.REACT_APP_SERVER_API_URL}/api/copy-items/recommend`
+        );
+        if (!res.ok) throw new Error("서버 응답 실패");
+
+        data = await res.json();
+        tryCount++;
+
+        // 중복이면 다시 요청 (최대 5번까지만 시도)
+      } while (data.id === recommendData?.id && tryCount < 5);
+
       setRecommendData(data);
     } catch (error) {
       console.error("추천 데이터 불러오기 오류:", error);
@@ -35,6 +46,8 @@ function CopyMainPage() {
         content: "추천 데이터를 불러오지 못했습니다.",
         cover_url: "/images/exbook1.png",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -68,11 +81,6 @@ function CopyMainPage() {
       >
         <div className="main-back">
           <div className="hero-center">
-            {/* <img
-              className="hero-icon"
-              src="/images/copy_reader.png"
-              alt="필사 아이콘"
-            /> */}
             <h1 className="hero-title">고전문학 필사하기</h1>
 
             <div className="hero-actions">
@@ -90,52 +98,66 @@ function CopyMainPage() {
         </div>
       </div>
 
-      {/* 모달 */}
-      {isModalOpen && recommendData && (
-        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-          <div className="book-modal" onClick={(e) => e.stopPropagation()}>
+      {/* 문학 추천 모달 */}
+      {isModalOpen && (
+        <div
+          className="literature_modal-overlay"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className="literature_modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className="modal-close"
+              className="literature_modal-close"
               onClick={() => setIsModalOpen(false)}
             >
               ×
             </button>
-            <p className="modal-question">
+
+            {/* ❗항상 보이는 질문 텍스트 */}
+            <p className="literature_modal-question">
               해당 작품에 대한 필사를 진행하시겠습니까?
             </p>
-            {/* 데이터 로딩 상태 처리 */}
-            {recommendData ? (
-              <div className="book-info">
-                {recommendData.cover_url && (
-                  <img
-                    className="book-cover"
-                    src={recommendData.cover_url?.replace(/"/g, "")}
-                    alt={recommendData.title}
-                  />
-                )}
-                <div className="book-text">
-                  <h3 className="book-title">
-                    [{recommendData.title}] - {recommendData.author}
-                  </h3>
-                  {/* <p className="book-content">{recommendData.content}</p> */}
-                  <p className="book-content">
-                    {recommendData?.content.length > 250
-                      ? recommendData.content.slice(0, 250) + "..."
-                      : recommendData?.content}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <p>추천 작품을 불러오는 중입니다...</p>
-            )}
-            <div className="modal-buttons">
-              <button className="btn-secondary" onClick={fetchRecommend}>
+
+            {/* 🔄 책 정보 영역: 로딩 중이면 스피너, 아니면 내용 */}
+            <div className="literature_book-info">
+              {isLoading ? (
+                <LoadingSpinner_modal />
+              ) : (
+                <>
+                  {recommendData?.cover_url && (
+                    <img
+                      className="literature_book-cover"
+                      src={recommendData.cover_url.replace(/"/g, "")}
+                      alt={recommendData.title}
+                    />
+                  )}
+                  <div className="literature_book-text">
+                    <h3 className="literature_book-title">
+                      [{recommendData.title}] - {recommendData.author}
+                    </h3>
+                    <p className="literature_book-content">
+                      {recommendData.content.length > 250
+                        ? recommendData.content.slice(0, 250) + "..."
+                        : recommendData.content}
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* ❗항상 보이는 버튼 */}
+            <div className="literature_modal-buttons">
+              <button
+                className="literature_btn-secondary"
+                onClick={fetchRecommend}
+              >
                 다시추천
               </button>
               <button
-                className="btn-primary"
+                className="literature_btn-primary"
                 onClick={goTranscription}
-                // onClick={() => navigate("/copy/start")}
               >
                 필사하기
               </button>
