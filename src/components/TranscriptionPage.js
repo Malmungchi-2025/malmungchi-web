@@ -11,18 +11,6 @@ import { SlArrowLeft } from "react-icons/sl";
 
 // 유틸 함수
 // 긴 문자열을 일정한 수로 잘라 page배열에 넣는 함수.
-// 직접 추가 전 코드
-// function paginateContent(content, maxChars = 278) {
-//   if (!content) return [""];
-//   const text = content.replace(/\r\n/g, "\n").trim();
-//   const pages = [];
-//   let start = 0;
-//   while (start < text.length) {
-//     pages.push(text.slice(start, start + maxChars));
-//     start += maxChars;
-//   }
-//   return pages;
-// }
 function paginateContent(content, maxChars = 278, maxLines = 5) {
   if (!content) return [""];
 
@@ -92,22 +80,31 @@ export default function TranscriptionPage() {
   const paragraph = pages[pageIdx] || "";
   const typed = typedByPage[pageIdx] || "";
 
+  // 계산
+  const canEditCurrentPage = pages
+    .slice(0, pageIdx)
+    .every(
+      (p, idx) => (typedByPage[idx] ?? "").trim().length >= p.trim().length
+    );
+
   // 사용자가 필사영역(contentEditable)에 글을 작성할 때 실행되는 핸들러
   const onInput = () => {
-    // 필사 영역에 들어온 텍스트를 가져옴
-    // const text = editorRef.current?.innerText ?? "";
-    // setTypedByPage((prev) => {
-    //   const next = [...prev];
-    //   next[pageIdx] = text;
-    //   return next;
-    // });
-    // if (isComposing.current) return;
+    if (!canEditCurrentPage) return; // ✅ 이전 페이지 미완성 시 입력 무시
+
     const text = editorRef.current?.innerText ?? "";
     setTypedByPage((prev) => {
       const next = [...prev];
       next[pageIdx] = text;
       return next;
     });
+
+    const isFullyTyped =
+      text.replace(/\s+/g, "") === paragraph.replace(/\s+/g, "");
+    if (isFullyTyped && pageIdx < pages.length - 1) {
+      setTimeout(() => {
+        setPageIdx((prev) => prev + 1);
+      }, 300);
+    }
   };
 
   // 사용자가 필사 중간에 나갈 때 나타나는 경고창
@@ -179,13 +176,6 @@ export default function TranscriptionPage() {
       editor.removeEventListener("compositionend", handleEnd);
     };
   }, [pageIdx]);
-
-  // 공백과 줄바꿈을 같은 토큰으로 처리
-  // 중간 이후 변경된 부분
-  // const overlayText = src
-  //   .split("")
-  //   .map((ch, i) => (user[i] === ch ? ch : " "))
-  //   .join("");
 
   const correctColor = dark ? "#fff" : "#000";
   const wrongColor = "#ff3b30";
@@ -336,7 +326,7 @@ export default function TranscriptionPage() {
       <Navbar
         bgColor={dark ? "#262626" : "#ffffff"} // 다크모드일 땐 검정, 라이트모드일 땐 흰색
         textColor={dark ? "#FFFFFF" : "#262626"} // 다크모드일 땐 밝은 회색, 라이트모드일 땐 진한 회색
-        logoSrc={dark ? "/images/logo_b.png" : "/images/logo_b.png"} // 다크일 땐 흰색 로고, 라이트일 땐 검정 로고
+        logoSrc={dark ? "/images/logo_w.png" : "/images/logo_b.png"} // 다크일 땐 흰색 로고, 라이트일 땐 검정 로고
       />
       {/* 기본 세팅 */}
       <div className="container">
@@ -415,7 +405,8 @@ export default function TranscriptionPage() {
                 <div
                   className="editor"
                   ref={editorRef}
-                  contentEditable
+                  // contentEditable
+                  contentEditable={canEditCurrentPage}
                   spellCheck={false}
                   onInput={onInput}
                   role="textbox"

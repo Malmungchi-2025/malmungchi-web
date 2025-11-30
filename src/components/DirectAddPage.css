@@ -29,8 +29,16 @@
   font-weight: 500;
 }
 
-.direct-add-btn:hover {
+/* 활성화 상태 */
+.direct-add-btn.active {
   background: #195fcf;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* 활성화 상태에서 호버 */
+.direct-add-btn.active:hover {
+  background: #004cc7;
 }
 
 .direct-add-input {
@@ -57,9 +65,21 @@
   font-size: 26px;
   color: #262626;
   resize: none;
+  scrollbar-width: thin;
+  scrollbar-color: #989898 transparent;
 }
-.direct-add-textarea::placeholder {
-  color: #989898; /* placeholder 색상 */
+/* Chrome, Edge, etc. */
+.direct-add-textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.direct-add-textarea::-webkit-scrollbar-thumb {
+  background-color: #989898;
+  border-radius: 4px;
+}
+
+.direct-add-textarea::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* 색 표지 색상 */
@@ -103,6 +123,7 @@
 }
 .direct-add-cover-btn.white {
   background-color: #fafafa;
+  border: 1.5px solid #e0e0e0;
 }
 
 /* 모달*/

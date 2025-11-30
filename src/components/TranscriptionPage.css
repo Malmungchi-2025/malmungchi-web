@@ -33,7 +33,7 @@
   border: 0;
   background: #fff2b2;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 /* 다크모드_토글 버튼 배경색*/
@@ -50,7 +50,7 @@
   height: 34px;
   border-radius: 50%;
   background: #ffffff;
-  transition: left 0.2s ease, background 0.3s ease;
+  transition: left 0.2s ease, background-color 0.3s ease;
 }
 
 /* 다크모드_토글 버튼 동그라미 이동 */
@@ -244,12 +244,22 @@
   cursor: pointer;
   background: #195fcf;
   color: #fff;
+  transition: background-color 0.3s;
+}
+
+.btn-finish:hover {
+  background: #004cc7;
 }
 
 /* 다크 모드 */
 .page-root.dark .btn-finish {
   background: #fafafa;
   color: #262626;
+  transition: background-color 0.3s;
+}
+
+.page-root.dark .btn-finish:hover {
+  background: #eeeeee;
 }
 
 /* 중간에 나갈 때 나타나는 모달 */
@@ -267,19 +277,12 @@
 /* 모달 상자 */
 /* 라이트 모드 */
 .middleout-modal-box {
-  /* background: #fff;
-  border-radius: 20px;
-  width: 720px;
-  height: 400px;
-  max-width: 90%;
-  text-align: center;
-  position: relative; */
-
   background: #fff;
   border-radius: 20px;
-  width: 720px;
+  /* width: 720px; */
+  width: 38%;
   max-width: 90%;
-  max-height: 85vh; /* ✅ 노트북 화면 기준으로 높이 제한 */
+  max-height: 85vh;
   text-align: center;
   position: relative;
   padding: 60px 30px 40px; /* ✅ 내부 여백 조정 */

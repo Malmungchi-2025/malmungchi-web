@@ -59,7 +59,11 @@ function DirectAddPage() {
         <div className="main-back direct-main">
           <div className="direct-add-header">
             <h2 className="direct-add-title">직접추가하기</h2>
-            <button className="direct-add-btn" onClick={handleAdd}>
+            <button
+              className={`direct-add-btn ${content.trim() ? "active" : ""}`}
+              onClick={handleAdd}
+              disabled={!content.trim()} // 비활성화
+            >
               글 추가하기
             </button>
           </div>
