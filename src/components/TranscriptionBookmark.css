@@ -86,10 +86,22 @@
   text-align: right;
 }
 
-/* 📌 기본 텍스트 색상 */
+/* 직접추가- author기본: 숨김 */
+.bookmarkcard-custom .bookmarkcard-author {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 직접추가- author hover 시: 나타남 */
+.bookmarkcard-custom:hover .bookmarkcard-author {
+  opacity: 1;
+}
+
+/* 직접추가- 기본 텍스트 색상 */
 .bookmarkcard-classic .bookmarkcard-info {
   opacity: 0; /* hover 전 투명 */
   color: #fff; /* hover 시 흰색으로 나타남 */
+  transition: opacity 0.2s ease;
 }
 
 .bookmarkcard-custom .bookmarkcard-info {
