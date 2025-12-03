@@ -14,8 +14,7 @@ function TranscriptionCompletePage() {
     green: "#ecff9f",
     white: "#fafafa",
   };
-  // const points = location.state?.points || 0;
-  // const { points, dark } = location.state || { points: 0, dark: false };
+
   const { points, dark, custom, book, typedByPage = [] } = location.state || {};
   const typedContent = typedByPage.length > 0 ? typedByPage.join("\n") : "";
 
@@ -27,9 +26,6 @@ function TranscriptionCompletePage() {
         navigate("/login");
         return;
       }
-
-      // const { custom, book, typedByPage } = location.state;
-      // const typedContent = typedByPage.join("\n");
 
       const payload = {
         type: custom ? "custom" : "classic",
@@ -52,7 +48,21 @@ function TranscriptionCompletePage() {
         }
       );
 
+      // ✅ 2. 포인트 누적 요청 추가 (여기서부터 새 코드)
+      const pointRes = await fetch(
+        `${process.env.REACT_APP_SERVER_API_URL}/api/transcriptions/points`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ point: points }), // 현재 받은 포인트를 누적
+        }
+      );
+
       if (!res.ok) throw new Error("저장 실패");
+      if (!pointRes.ok) throw new Error("포인트 저장 실패");
 
       alert("저장 완료! 필사갈피에서 확인할 수 있습니다.");
       navigate("/transcription-bookmark");

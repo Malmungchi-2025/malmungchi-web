@@ -23,6 +23,11 @@ function Navbar({ bgColor, textColor, logoSrc }) {
     if (type === "main") {
       navigate("/copy-main");
     } else if (type === "bookmark") {
+      if (!user) {
+        alert("로그인이 필요한 서비스입니다.");
+        navigate("/login"); // ✅ 경고 후 로그인 페이지로 이동
+        return;
+      }
       navigate("/transcription-bookmark");
     }
   };
@@ -31,7 +36,14 @@ function Navbar({ bgColor, textColor, logoSrc }) {
     setOpenModal(null);
     if (option === "writing") navigate("/");
     if (option === "allpost") navigate("/allpost");
-    if (option === "writingbookmark") navigate("/writing-bookmark");
+    if (option === "writingbookmark") {
+      if (!user) {
+        alert("로그인이 필요한 서비스입니다.");
+        navigate("/login"); // ✅ 로그인 화면으로 이동
+        return;
+      }
+      navigate("/writing-bookmark");
+    }
   };
 
   return (
