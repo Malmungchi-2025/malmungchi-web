@@ -36,6 +36,7 @@ function TranscriptionCompletePage() {
         customColor: custom?.color ? colorMap[custom.color] : null,
       };
 
+      // 1. 필사 저장 요청
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_API_URL}/api/transcriptions`,
         {
@@ -48,21 +49,26 @@ function TranscriptionCompletePage() {
         }
       );
 
-      // ✅ 2. 포인트 누적 요청 추가 (여기서부터 새 코드)
-      const pointRes = await fetch(
-        `${process.env.REACT_APP_SERVER_API_URL}/api/transcriptions/points`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ point: points }), // 현재 받은 포인트를 누적
-        }
-      );
-
       if (!res.ok) throw new Error("저장 실패");
-      if (!pointRes.ok) throw new Error("포인트 저장 실패");
+
+      // 2. 포인트가 0보다 클 때만 포인트 저장 요청
+      if (points > 0) {
+        const pointRes = await fetch(
+          `${process.env.REACT_APP_SERVER_API_URL}/api/transcriptions/points`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ point: points }),
+          }
+        );
+
+        if (!pointRes.ok) throw new Error("포인트 저장 실패");
+      } else {
+        console.log("포인트가 0이라 저장 요청 생략");
+      }
 
       alert("저장 완료! 필사갈피에서 확인할 수 있습니다.");
       navigate("/transcription-bookmark");

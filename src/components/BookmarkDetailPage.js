@@ -7,14 +7,14 @@ import { useParams, useNavigate } from "react-router-dom";
 // import { FaRegHeart } from "react-icons/fa6";
 // import { FiBookmark } from "react-icons/fi";
 import { useLikeContext } from "../contexts/LikeContext";
-
-import { FaRegHeart, FaHeart } from "react-icons/fa6";
-import { FiBookmark } from "react-icons/fi";
+import { FaHeart } from "react-icons/fa6";
 import { BsBookmarkFill } from "react-icons/bs";
+import LoadingSpinner_b from "./LoadingSpinner_bright";
 
 export default function BookmarkDetailPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const [liked, setLiked] = useState(null);
@@ -35,6 +35,7 @@ export default function BookmarkDetailPage() {
     }
 
     const fetchPostData = async () => {
+      setLoading(true);
       try {
         // 1️⃣ 글 데이터 불러오기
         const postRes = await fetch(
@@ -69,6 +70,8 @@ export default function BookmarkDetailPage() {
       } catch (err) {
         console.error("❌ 서버 오류:", err);
         alert("데이터를 불러오지 못했습니다.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -138,6 +141,7 @@ export default function BookmarkDetailPage() {
   };
 
   if (!post) return null;
+  if (loading) return <LoadingSpinner_b />;
 
   return (
     <div className="container">
