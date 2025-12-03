@@ -10,6 +10,7 @@ import { GoChevronDown } from "react-icons/go";
 import { FiSearch } from "react-icons/fi";
 import { useLikeContext } from "../contexts/LikeContext";
 import LoadingSpinner from "../components/LoadingSpinner";
+import PromptSuggestion from "./PromptSuggestion";
 
 export default function AllPostsPage() {
   const navigate = useNavigate();
@@ -55,11 +56,6 @@ export default function AllPostsPage() {
       const promptData = await resPrompt.json();
       console.log("✅ prompt 조회 결과:", promptData);
 
-      // 2. 정확히 일치하는 글감만 추출
-      // const matchedPrompt = promptData.find(
-      //   (prompt) => prompt.word === searchKeyword
-      // );
-
       const matchedPrompt = promptData.find((prompt) =>
         prompt.word.includes(searchKeyword)
       );
@@ -73,7 +69,7 @@ export default function AllPostsPage() {
       const promptId = matchedPrompt.id;
       console.log("🎯 선택된 promptId:", promptId);
 
-      // 3. 해당 글감 ID로 글 목록 조회
+      // 2. 해당 글감 ID로 글 목록 조회
       const resPosts = await fetch(
         `${process.env.REACT_APP_SERVER_API_URL}/api/writings?promptId=${promptId}`,
         {
@@ -84,9 +80,14 @@ export default function AllPostsPage() {
       const data = await resPosts.json();
       console.log("✅ 글 목록 조회 결과:", data);
 
-      setFilteredPosts(data);
+      // ✅ 좋아요/스크랩 반영
+      const merged = data.map((p) => {
+        const updated = updatedPosts[p.id];
+        return updated ? { ...p, ...updated } : p;
+      });
+
+      setFilteredPosts(merged); // 병합된 결과로 설정
       setCurrentPage(1);
-      console.log("✅ 글 목록 조회 결과:", data);
     } catch (err) {
       console.error("검색 실패:", err);
       setFilteredPosts([]);
@@ -102,11 +103,6 @@ export default function AllPostsPage() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // // ✅ 아래 섹션으로 부드럽게 이동
-  // const handleScrollDown = () => {
-  //   lowerSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
 
   const handleScrollDown = () => {
     if (lowerSectionRef.current) {
@@ -159,19 +155,9 @@ export default function AllPostsPage() {
     return updated ? { ...p, ...updated } : p;
   });
 
-  // const filteredPosts = mergedPosts.filter((post) =>
-  //   post.prompt_name?.toLowerCase().includes(searchKeyword.toLowerCase())
-  // );
-
   // ✅ 현재 페이지에 맞는 글 목록 계산
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  // const currentPosts = mergedPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // ✅ 전체 페이지 수 계산
-  // const totalPages = Math.ceil(posts.length / postsPerPage);
-  // const totalPages = Math.ceil(mergedPosts.length / postsPerPage);
 
   const displayPosts = filteredPosts ?? mergedPosts;
 
@@ -350,20 +336,11 @@ export default function AllPostsPage() {
 
             {/* 검색창 */}
             <div className="allposts-search-bar">
-              {/* <input
-                type="text"
-                placeholder="원하는 글을 검색해보세요!"
-                className="allposts-search-input"
-              /> */}
               <input
                 type="text"
                 placeholder="원하는 글감을 검색해보세요!"
                 className="allposts-search-input"
                 value={searchKeyword}
-                // onChange={(e) => {
-                //   setSearchKeyword(e.target.value);
-                //   setCurrentPage(1); // 검색 시 페이지 초기화
-                // }}
                 onChange={(e) => setSearchKeyword(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -375,6 +352,9 @@ export default function AllPostsPage() {
                 <FiSearch />
               </span>
             </div>
+
+            {/* 글감 랜덤 추천 */}
+            <PromptSuggestion />
 
             {/* 게시글 리스트 (임시 데이터) */}
             <div className="allposts-list-table">

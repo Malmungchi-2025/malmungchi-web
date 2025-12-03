@@ -37,7 +37,8 @@
   margin-top: 20px;
   position: relative;
   /* height: 610px; */
-  height: clamp(480px, 60vh, 610px);
+  /* height: clamp(480px, 60vh, 610px); */
+  height: 62vh;
   perspective: 1600px;
   display: flex;
   justify-content: center;
@@ -415,7 +416,7 @@
   background-color: #f7f7f7;
   border-radius: 20px;
   padding: 30px 50px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -452,7 +453,7 @@
   /* border-radius: 6px; */
   background-color: #eff4fb;
   color: #262626;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
   cursor: pointer;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -479,9 +480,6 @@
 
 /* 각각의 아이콘+숫자 묶음 */
 .allposts-list-col.icons span {
-  /* display: flex;
-  align-items: center;
-  gap: 5px;  */
   font-size: 22px;
   color: #262626;
   display: inline-flex;
