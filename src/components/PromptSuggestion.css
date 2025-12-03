@@ -1,0 +1,30 @@
+.prompt-recommend-section {
+  margin-bottom: 0px;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.prompt-recommend-section_header {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 8px;
+}
+
+.prompt-recommend_refresh-btn {
+  background: none;
+  border: none;
+}
+
+.prompt-recommend-section_header span {
+  font-size: 24px;
+  color: #aaaaaa;
+}
+
+.prompt-recommend-section p {
+  font-size: 24px;
+  color: #aaaaaa;
+}
+.promt-recommend-word {
+  color: #909090;
+}

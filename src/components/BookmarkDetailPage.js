@@ -168,10 +168,6 @@ export default function BookmarkDetailPage() {
                   onClick={handleLike}
                   style={{ cursor: "pointer" }}
                 >
-                  {/* <FaRegHeart
-                    className="icon"
-                    style={{ color: liked ? "#ff5a5a" : "#999" }}
-                  /> */}
                   <FaHeart
                     className={`icon like-icon ${liked ? "liked" : ""}`}
                   />
@@ -182,10 +178,6 @@ export default function BookmarkDetailPage() {
                   onClick={handleScrap}
                   style={{ cursor: "pointer" }}
                 >
-                  {/* <FiBookmark
-                    className="icon"
-                    style={{ color: scrapped ? "#1CD282" : "#999" }}
-                  /> */}
                   <BsBookmarkFill
                     className={`icon scrap-icon ${scrapped ? "scrapped" : ""}`}
                   />
