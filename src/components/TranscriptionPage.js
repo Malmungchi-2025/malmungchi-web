@@ -39,7 +39,7 @@ function paginateContent(content, maxChars = 278, maxLines = 5) {
       end = start + cutIndex;
     }
 
-    pages.push(chunk.trim());
+    pages.push(chunk.replace(/\s+\n/g, "\n").replace(/\n\s+/g, "\n").trim());
     start = end;
   }
 
@@ -89,24 +89,53 @@ export default function TranscriptionPage() {
 
   // 사용자가 필사영역(contentEditable)에 글을 작성할 때 실행되는 핸들러
   const onInput = () => {
-    if (!canEditCurrentPage) return; // ✅ 이전 페이지 미완성 시 입력 무시
+    if (!canEditCurrentPage) return;
+    if (!editorRef.current) return;
 
-    const text = editorRef.current?.innerText ?? "";
+    const editor = editorRef.current;
+
+    // 줄 단위로 추출
+    const lines = Array.from(editor.childNodes).map((node) => {
+      if (node.nodeName === "DIV") {
+        const text = node.textContent || "";
+        return text.replace(/\u00a0/g, "").trim() === "" ? "" : text;
+      }
+      if (node.nodeName === "#text") {
+        return node.textContent || "";
+      }
+      return "";
+    });
+
+    const processedText = lines.join("\n");
+
+    // ✅ 무조건 저장 (강조 표시용으로 필요)
     setTypedByPage((prev) => {
       const next = [...prev];
-      next[pageIdx] = text;
+      next[pageIdx] = processedText;
       return next;
     });
 
-    const isFullyTyped =
-      text.replace(/\s+/g, "") === paragraph.replace(/\s+/g, "");
-    if (isFullyTyped && pageIdx < pages.length - 1) {
-      setTimeout(() => {
-        setPageIdx((prev) => prev + 1);
-      }, 300);
+    // ✅ 비교는 조합 중 아닐 때만
+    if (!isComposing.current) {
+      const normalize = (s) =>
+        s
+          .replace(/\r\n/g, "\n")
+          .replace(/\u3000/g, "") // 전각 스페이스 제거
+          .replace(/\u00a0/g, "") // &nbsp; 제거
+          .replace(/\s+\n/g, "\n")
+          .replace(/\n\s+/g, "\n")
+          .replace(/\s+/g, "")
+          .trim();
+
+      const isFullyTyped = normalize(processedText) === normalize(paragraph);
+
+      if (isFullyTyped && pageIdx < pages.length - 1) {
+        setTimeout(() => {
+          setPageIdx((prev) => prev + 1);
+        }, 200);
+      }
     }
   };
-
   // 사용자가 필사 중간에 나갈 때 나타나는 경고창
   useEffect(() => {
     const handler = (e) => {
@@ -124,15 +153,25 @@ export default function TranscriptionPage() {
   const user = normalize(typed).slice(0, paragraph.length);
   const src = normalize(paragraph);
 
-  // 11.27.원분 때문에 그래
   const ghostTextHTML = src
-    .split("")
-    .map((ch, i) => {
-      if (i < user.length) {
-        // 이미 작성한 글자 or 현재 입력 중인 글자 → 희미하게
-        return `<span style="opacity: 0.2;">${ch}</span>`;
-      }
-      return ch; // 아직 입력 안 한 부분은 회색 그대로
+    .split("\n")
+    .map((line, lineIndex) => {
+      const lineHTML = line
+        .split("")
+        .map((ch, i) => {
+          const globalIndex =
+            src
+              .split("\n")
+              .slice(0, lineIndex)
+              .reduce((acc, l) => acc + l.length + 1, 0) + i;
+
+          if (globalIndex < user.length) {
+            return `<span style="opacity: 0.2;">${ch}</span>`;
+          }
+          return ch;
+        })
+        .join("");
+      return `<div>${lineHTML}</div>`;
     })
     .join("");
 
@@ -144,28 +183,14 @@ export default function TranscriptionPage() {
     const editor = editorRef.current;
     if (!editor) return;
 
-    const handleStart = () => (isComposing.current = true);
+    const handleStart = () => {
+      isComposing.current = true;
+    };
 
     const handleEnd = () => {
       isComposing.current = false;
-
-      // 조합이 끝난 뒤에만 내용 갱신
-      const text = editorRef.current?.innerText ?? "";
-      setTypedByPage((prev) => {
-        const next = [...prev];
-        next[pageIdx] = text;
-        return next;
-      });
-
-      // ✅ 커서를 작성 중인 글 바로 뒤로 복원
-      requestAnimationFrame(() => {
-        const sel = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents(editorRef.current);
-        range.collapse(false); // 끝부분으로 커서 이동
-        sel.removeAllRanges();
-        sel.addRange(range);
-      });
+      // ✅ 여기서는 아무 것도 저장하지 않는다
+      // (onInput에서만 저장)
     };
 
     editor.addEventListener("compositionstart", handleStart);
@@ -175,28 +200,43 @@ export default function TranscriptionPage() {
       editor.removeEventListener("compositionstart", handleStart);
       editor.removeEventListener("compositionend", handleEnd);
     };
-  }, [pageIdx]);
+  }, []);
 
   const correctColor = dark ? "#fff" : "#000";
   const wrongColor = "#ff3b30";
   const currentInputColor = dark ? "#fff" : "#000";
 
-  const overlayText = user
-    .split("")
-    .map((ch, i) => {
-      if (i >= src.length) return "";
+  const overlayText = src
+    .split("\n")
+    .map((line, lineIndex) => {
+      const lineHTML = line
+        .split("")
+        .map((ch, i) => {
+          const globalIndex =
+            src
+              .split("\n")
+              .slice(0, lineIndex)
+              .reduce((acc, l) => acc + l.length + 1, 0) + i;
 
-      const isLast = i === user.length - 1;
+          if (globalIndex >= user.length) return "";
 
-      if (isLast) {
-        return `<span style="color: ${currentInputColor};">${ch}</span>`;
-      }
+          const typedChar = user[globalIndex];
+          const isLast = globalIndex === user.length - 1;
 
-      if (ch === src[i]) {
-        return `<span style="color: ${correctColor};">${ch}</span>`; // ✅ 다크모드 대응됨
-      } else {
-        return `<span style="color: ${wrongColor};">${ch}</span>`;
-      }
+          if (ch === "\n") return "<br />";
+
+          if (isLast) {
+            return `<span style="color: ${currentInputColor};">${typedChar}</span>`;
+          }
+
+          if (typedChar === ch) {
+            return `<span style="color: ${correctColor};">${typedChar}</span>`;
+          } else {
+            return `<span style="color: ${wrongColor};">${typedChar}</span>`;
+          }
+        })
+        .join("");
+      return `<div>${lineHTML}</div>`;
     })
     .join("");
 
@@ -264,13 +304,17 @@ export default function TranscriptionPage() {
   // 왜 필요한지는 모르겠는데 일단 필요함;;;
   useEffect(() => {
     if (book?.content) {
-      // const cleanContent = book.content.replace(/\s*\n\s*/g, " ");
-      const cleanContent = book.content.replace(/\s*\n\s*/g, " ");
-      const newPages = paginateContent(cleanContent, 278);
+      // custom(직접 추가)이면 줄바꿈 유지
+      // 책 데이터면 기존처럼 줄바꿈 제거
+      const contentToUse = custom
+        ? book.content
+        : book.content.replace(/\s*\n\s*/g, " ");
+
+      const newPages = paginateContent(contentToUse, 278);
       setPages(newPages);
       setPageIdx(0);
     }
-  }, [book]);
+  }, [book, custom]);
 
   // //직접추가하기에서 전달된 내용이 있는지 확인
   useEffect(() => {
