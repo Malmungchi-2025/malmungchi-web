@@ -18,7 +18,8 @@
 
 .TCP-hero-center img {
   margin-top: 0px;
-  width: 26%;
+  /* width: 26%; */
+  width: 29vw; /* 화면 너비 기준 비율로 반응형 */
 }
 
 .TCP-hero-center p {

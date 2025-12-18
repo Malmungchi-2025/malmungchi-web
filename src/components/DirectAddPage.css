@@ -1,5 +1,6 @@
 .direct-main {
-  padding: 0 250px;
+  /* padding: 0 250px; */
+  padding: 0 12vw;
 }
 .direct-add-header {
   display: flex;
@@ -55,16 +56,18 @@
 }
 
 .direct-add-textarea {
-  height: 420px;
-  padding: 60px 60px;
+  width: 90%;
+  height: 50vh; /* ✅ 높이도 반응형 */
+  padding: 4vw; /* ✅ 상하좌우 반응형 여백 */
+  font-size: 1.3vw; /* ✅ 텍스트 크기 반응형 */
+  max-font-size: 26px;
   border: none;
   outline: none;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
   border-radius: 25px;
-  font-family: "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 26px;
-  color: #262626;
   resize: none;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  color: #262626;
   scrollbar-width: thin;
   scrollbar-color: #989898 transparent;
 }
@@ -170,7 +173,7 @@
 
 .add-modal-box2 {
   width: 60%;
-  height: 64%;
+  height: 60%;
   background: #fff;
   border-radius: 25px;
   padding: 80px;

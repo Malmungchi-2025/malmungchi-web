@@ -101,9 +101,12 @@
 /* ↑ 버튼 스타일 */
 .scroll-up {
   position: absolute;
-  bottom: 120px;
+  /* bottom: 120px;
   right: 250px;
-  font-size: 68px;
+  font-size: 68px; */
+  bottom: 12vh; /* 적당한 세로 여백 */
+  right: 12.2vw; /* 네비랑 맞춰서 반응형 위치 */
+  font-size: 3vw; /* 적절한 크기 반응형 */
   background: none;
   border: none;
   cursor: pointer;
@@ -161,7 +164,7 @@
 }
 
 .image img {
-  width: 900px;
+  width: 48vw;
   height: auto;
 }
 
@@ -200,9 +203,12 @@
 /* 인디케이터 */
 .section-indicator {
   position: absolute;
-  bottom: 60px;
+  /* bottom: 60px;
   right: 250px;
-  font-size: 32px;
+  font-size: 32px; */
+  bottom: 7vh; /* ↑보다 조금 아래 */
+  right: 12vw; /* 같은 right으로 수직 정렬 맞춤 */
+  font-size: 1.8vw; /* 반응형 텍스트 크기 */
   color: #f7f7f7;
   font-weight: 550;
   z-index: 2;

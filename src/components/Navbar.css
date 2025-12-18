@@ -14,9 +14,10 @@
 }
 
 .navbar-inner {
-  /* 네비게이션 패딩 값 고려하여 넣은 너비 값임 */
-  width: 1410px;
+  width: 100%;
   height: 100%;
+  /* 반응형 사용 */
+  padding: 0 12vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
