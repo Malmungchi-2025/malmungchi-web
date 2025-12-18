@@ -92,7 +92,7 @@
 
 .literature_modal {
   width: 60%;
-  height: 62%;
+  height: 54vh;
   background: #fff;
   border-radius: 25px;
   padding: 80px;
@@ -115,8 +115,9 @@
 }
 
 .literature_book-cover {
-  width: 26%;
-  height: 26%;
+  width: 13vw;
+  /* height: 26%; */
+  height: 18.5vw;
   position: relative;
   z-index: 1;
 }
@@ -134,7 +135,8 @@
 
 .literature_book-content {
   font-weight: 400;
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 1.5vw;
   line-height: 1.5;
   color: #989898;
   margin-bottom: 0px;

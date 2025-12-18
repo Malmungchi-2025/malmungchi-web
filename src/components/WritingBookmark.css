@@ -11,16 +11,17 @@
 
 .writingbookmark-grid {
   display: grid;
-  grid-template-columns: repeat(4, 300px); /* 카드 4개 */
-  column-gap: 66px; /* 좌우 간격 */
-  row-gap: 20px; /* 위아래 간격 */
-  justify-content: center; /* 화면 가운데 정렬 */
+  grid-template-columns: repeat(4, 18vw); /* 카드 너비와 통일 */
+  column-gap: 1vw;
+  row-gap: 1vw;
+  justify-content: center;
+  padding-left: 0vw; /* ✅ 왼쪽으로 살짝 밀기 */
 }
 
 .writingbookmark-card {
   position: relative;
-  width: 340px;
-  height: 400px;
+  width: 18vw; /* ✅ 화면 너비의 18% */
+  height: calc(18vw * 1.176); /* ✅ 5:6 비율 유지 (400/340 ≈ 1.176) */
   border-radius: 8px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 40px;

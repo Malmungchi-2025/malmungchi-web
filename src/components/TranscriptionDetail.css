@@ -1,9 +1,12 @@
 .transcript-detail-container {
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
-  background-attachment: fixed;
+  align-items: center; /* 가로 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  /* 맥북을 위한 임시 */
+  height: calc(100vh + 150px);
   background: #ffffff;
+  background-attachment: fixed;
 }
 
 .detail-page {
@@ -75,7 +78,7 @@
 }
 
 .detail-footer {
-  margin-top: 24px;
+  margin-top: 1.5vw;
   font-size: 24px;
   color: #616161;
   text-align: right;

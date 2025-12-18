@@ -230,10 +230,10 @@
 }
 
 .correction-results {
-  margin: 20px auto;
+  margin: 0px auto;
   margin-bottom: 120px;
   padding: 0px;
-  width: 74%;
+  width: 76vw;
   background-color: #fff;
   border-radius: 10px;
 }

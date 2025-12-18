@@ -13,7 +13,12 @@
 }
 
 .page-container {
-  margin: 60px 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ✅ 수직 중앙 정렬 */
+  min-height: calc(100vh - 100px); /* ✅ 화면 전체 높이 기준 */
+  margin: 0 7vw;
+  padding: 0 5vw;
 }
 
 /* 다크 토글 스위치 */
@@ -127,13 +132,13 @@
 /* 좌우 버튼 패딩 영향 안 받고 밖으로 뺴기 위함 */
 .pager-btn.left {
   position: absolute;
-  left: -80px; /* copy-box 왼쪽 바깥 */
+  left: -5vw; /* copy-box 왼쪽 바깥 */
   top: 50%;
   transform: translateY(-50%);
 }
 .pager-btn.right {
   position: absolute;
-  right: -80px; /* copy-box 오른쪽 바깥 */
+  right: -5vw; /* copy-box 오른쪽 바깥 */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -144,19 +149,19 @@
 
 /* 라이트모드_필사 박스 */
 .copy-box {
-  --pad: 60px;
+  --pad: 4vw;
   position: relative;
   white-space: pre-line; /* 원본 줄바꿈 유지 */
-  word-break: break-word; /* 너무 길면 강제로 줄바꿈 */
-  overflow-wrap: anywhere; /* 어디서든 잘라서 표시 가능 */
+  word-break: break-word;
+  overflow-wrap: anywhere;
   padding: var(--pad);
   border-radius: 25px;
   background: #ffffff;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.16);
+  width: 100%;
+  /* max-width: 1300px; */
   min-height: 280px;
   max-height: 280px;
-  min-width: 1300px;
-  max-width: 1300px;
 }
 
 /* 다크모드_필사 박스 */

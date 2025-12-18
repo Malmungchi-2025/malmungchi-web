@@ -213,7 +213,7 @@
 
 .allposts-second-inner {
   padding-top: 30px;
-  margin: 0px 250px;
+  margin: 0 12vw;
 }
 
 .allposts-lower-inner h2 {
@@ -253,17 +253,21 @@
 .allposts-popular-box.main {
   grid-row: span 2;
   grid-column: 1 / 2;
-  aspect-ratio: 0.8 / 1; /* 세로를 살짝 더 늘림 */
-  max-height: 690px;
-  padding: 80px 60px; /* 내부 여백도 비율에 맞게 살짝 줄임 */
+  aspect-ratio: 0.8 / 1; /* 가로:세로 비율 */
+  width: 30vw; /* 반응형 너비 */
+  padding: 4vw; /* 내부 여백도 비율 기반 */
   box-sizing: border-box;
+  max-height: calc(
+    30vw / 0.8
+  ); /* ⬅️ 비율에 따라 height 제한 (width ÷ aspect) */
 }
 
 .allposts-popular-box.sub {
-  aspect-ratio: 1.2 / 1; /* 세로 비율 통일 (약간 길게) */
-  max-height: 345px; /* 세로 크기 제한 */
-  padding: 60px 50px;
+  aspect-ratio: 1.2 / 1;
+  width: 22vw;
+  padding: 2.5vw;
   box-sizing: border-box;
+  max-height: calc(22vw / 1.2); /* ⬅️ 마찬가지로 자동 계산되도록 */
 }
 
 /* 메인 카드 텍스트 스타일 */
